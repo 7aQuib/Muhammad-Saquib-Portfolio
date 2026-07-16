@@ -2,13 +2,13 @@ import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDi1gYvmnRO-tbUJNTXUkE7DBrFWm1y4vs",
-  authDomain: "muhammad-saquib-portfolio.firebaseapp.com",
-  projectId: "muhammad-saquib-portfolio",
-  storageBucket: "muhammad-saquib-portfolio.firebasestorage.app",
-  messagingSenderId: "1043079020165",
-  appId: "1:1043079020165:web:ee118d1d8c43a1424a33ec",
-  measurementId: "G-FZVYTW94SV"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase only once to prevent hydration/hot-reload errors

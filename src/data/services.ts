@@ -7,7 +7,7 @@ export const services = [
     description: "We create brand systems that scale across digital and physical touchpoints.",
     slug: "branding-identity",
     icon: Fingerprint,
-    image: "/images/mockup-branding.jpg"
+    image: "/images/branding.png"
   },
   {
     title: "Packaging Design",
@@ -15,7 +15,7 @@ export const services = [
     description: "Premium, shelf-ready packaging that tells your product's story and creates a memorable unboxing experience.",
     slug: "packaging-design",
     icon: Package,
-    image: "/images/mockup-packaging.jpg"
+    image: "/images/packaging-design.png"
   },
   {
     title: "Social Media Kits",
@@ -23,7 +23,7 @@ export const services = [
     description: "Cohesive templates and assets designed specifically for Instagram, LinkedIn, and TikTok.",
     slug: "social-media-kits",
     icon: Smartphone,
-    image: "/images/mockup-social.jpg"
+    image: "/images/social-media-kit.png"
   },
   {
     title: "Printing Design",
@@ -31,6 +31,6 @@ export const services = [
     description: "High-quality print designs including brochures, banners, hoardings, and business stationery.",
     slug: "printing-design",
     icon: Printer,
-    image: "/images/mockup-printing.jpg"
+    image: "/images/biofetch-event-theme.jpeg"
   },
 ];

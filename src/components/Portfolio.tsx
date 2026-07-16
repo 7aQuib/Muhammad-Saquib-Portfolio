@@ -92,7 +92,7 @@ export function Portfolio() {
               alt={proj.title} 
               fill 
               sizes="400px"
-              className="object-cover"
+              className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
               priority
             />
           </div>

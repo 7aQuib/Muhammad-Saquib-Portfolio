@@ -61,7 +61,7 @@ export default async function ProjectPage({
             <img 
               src={project.image} 
               alt={project.title} 
-              className="w-full h-auto object-cover"
+              className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
             />
           </figure>
 
@@ -95,7 +95,7 @@ export default async function ProjectPage({
                 <img 
                   src={img} 
                   alt={`${project.title} gallery image ${i + 1}`} 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
                 />
               </figure>
             ))}

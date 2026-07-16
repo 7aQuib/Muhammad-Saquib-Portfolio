@@ -126,7 +126,7 @@ export function Testimonials() {
                     </div>
                     <p className="text-lg font-sans text-muted-foreground mb-6 flex-grow leading-relaxed">"{t.quote}"</p>
                     <div className="flex items-center gap-4 pt-6 border-t-2 border-border border-dashed">
-                      <img src={t.image} alt={t.author} className="w-14 h-14 rounded-full object-cover border-2 border-border" />
+                      <img src={t.image} alt={t.author} className="w-14 h-14 rounded-full object-cover border-2 border-border grayscale hover:grayscale-0 transition-all duration-500" />
                       <div>
                         <h3 className="font-display text-xl text-foreground">{t.author}</h3>
                         <p className="font-mono text-sm font-bold text-muted-foreground uppercase">{t.role}</p>
@@ -172,7 +172,7 @@ export function Testimonials() {
                       "{t.quote}"
                     </p>
                     <div className="flex items-center gap-4 pt-4 border-t-2 border-border border-dashed mt-auto">
-                      <img src={t.image} alt={t.author} className="w-12 h-12 rounded-full object-cover border-2 border-border bg-background" />
+                      <img src={t.image} alt={t.author} className="w-12 h-12 rounded-full object-cover border-2 border-border bg-background grayscale hover:grayscale-0 transition-all duration-500" />
                       <div>
                         <h3 className="font-display text-lg text-foreground truncate">{t.author}</h3>
                         <p className="font-mono text-xs font-bold text-muted-foreground uppercase truncate">{t.role}</p>

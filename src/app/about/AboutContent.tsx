@@ -201,7 +201,7 @@ export function AboutContent() {
             >
               {/* Education */}
               <motion.div variants={fadeUp}>
-                <h3 className="font-display font-bold text-3xl md:text-4xl mb-8">Education</h3>
+                <h3 className="font-display font-bold text-3xl md:text-4xl tracking-tighter mb-8">Education</h3>
                 <div className="space-y-8">
                   <div className="relative group">
                     <div className="absolute -left-6 top-1.5 w-2 h-2 rounded-full bg-border group-hover:bg-accent transition-colors"></div>
@@ -227,7 +227,7 @@ export function AboutContent() {
               {/* Experience */}
               <motion.div variants={fadeUp} className="relative">
                 <div className="absolute -left-16 top-0 w-8 h-px bg-border hidden lg:block"></div>
-                <h3 className="font-display font-bold text-3xl md:text-4xl mb-8">Experience</h3>
+                <h3 className="font-display font-bold text-3xl md:text-4xl tracking-tighter mb-8">Experience</h3>
                 <div className="space-y-8">
                   <div className="relative group">
                     <div className="absolute -left-6 top-1.5 w-2 h-2 rounded-full bg-border group-hover:bg-accent transition-colors"></div>
@@ -263,10 +263,7 @@ export function AboutContent() {
               >
                 {/* Skills */}
                 <motion.div variants={fadeUp}>
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-12 h-px bg-accent"></div>
-                    <h2 className="font-mono tracking-widest text-sm uppercase text-accent">Skills & Specialities</h2>
-                  </div>
+                  <h2 className="font-display font-bold text-3xl md:text-4xl tracking-tighter mb-8">Skills & Specialities</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
                     {[
                       { num: '01', title: 'Branding Identity' },
@@ -285,10 +282,7 @@ export function AboutContent() {
 
                 {/* Tools */}
                 <motion.div variants={fadeUp}>
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-12 h-px bg-accent"></div>
-                    <h2 className="font-mono tracking-widest text-sm uppercase text-accent">Design &amp; Editing Tools</h2>
-                  </div>
+                  <h2 className="font-display font-bold text-3xl md:text-4xl tracking-tighter mb-8">Design &amp; Editing Tools</h2>
 
                   <div className="space-y-8">
                     <div>
@@ -319,10 +313,7 @@ export function AboutContent() {
                 transition={{ duration: 0.8 }}
                 className="lg:col-span-5 lg:pl-12 lg:border-l lg:border-border"
               >
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-px bg-accent"></div>
-                  <h2 className="font-mono tracking-widest text-sm uppercase text-accent">Certifications</h2>
-                </div>
+                  <h2 className="font-display font-bold text-3xl md:text-4xl tracking-tighter mb-8">Certifications</h2>
                 <CertificateStack />
               </motion.div>
 

@@ -12,9 +12,8 @@ export function Hero() {
   const opacity = useTransform(scrollY, [0, 500], [1, 0]);
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { },
     visible: {
-      opacity: 1,
       transition: {
         staggerChildren: 0.1,
         delayChildren: 0.2,
@@ -36,8 +35,8 @@ export function Hero() {
       >
         <motion.span
           variants={{
-            hidden: { y: "100%", opacity: 0 },
-            visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" as const } }
+            hidden: { y: "100%" },
+            visible: { y: 0, transition: { duration: 0.8, ease: "easeOut" as const } }
           }}
           className="inline-block"
         >
@@ -62,6 +61,7 @@ export function Hero() {
             fill
             className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-1000"
             priority
+            placeholder="blur"
           />
           {/* Tiny dim so it isn't blindingly white */}
           <div className="absolute inset-0 bg-background/10" />

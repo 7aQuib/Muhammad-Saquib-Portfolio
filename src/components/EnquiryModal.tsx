@@ -46,14 +46,14 @@ export function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[100]">
       <div
         onClick={onClose}
         className="absolute inset-0 bg-background/40 backdrop-blur-sm"
       />
 
       <div
-        className="relative w-full max-w-lg bg-background rounded-2xl border-2 border-border shadow-hard overflow-hidden z-10 flex flex-col max-h-[calc(100vh-2rem)] sm:max-h-[85vh] animate-in fade-in zoom-in-95 duration-200"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-2rem)] max-w-lg bg-background rounded-2xl border-2 border-border shadow-hard overflow-hidden z-10 flex flex-col max-h-[calc(100vh-2rem)] sm:max-h-[85vh] animate-in fade-in zoom-in-95 duration-200"
       >
         <div className="flex-shrink-0 flex items-center justify-between p-6 border-b-2 border-border bg-card z-20">
           <h2 className="font-display text-2xl">Start a Project</h2>

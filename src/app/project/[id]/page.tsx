@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { projects } from "@/data/projects";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -9,6 +10,28 @@ export async function generateStaticParams() {
   return projects.map((project) => ({
     id: project.id,
   }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const project = projects.find((p) => p.id === id);
+
+  if (!project) {
+    return { title: 'Project Not Found' };
+  }
+
+  return {
+    title: `${project.title} | Projects`,
+    description: project.overview,
+    openGraph: {
+      title: `${project.title} | Projects | Mohammad Saquib`,
+      description: project.overview,
+      images: [{ url: project.image }],
+    },
+    alternates: {
+      canonical: `/project/${id}`,
+    }
+  };
 }
 
 export default async function ProjectPage({

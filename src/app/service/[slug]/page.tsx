@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
@@ -224,6 +225,27 @@ const workflowSteps = [
     desc: "All source files, exported assets, and comprehensive guidelines are delivered securely, ready for immediate use."
   }
 ];
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const service = servicesData[slug as keyof typeof servicesData];
+
+  if (!service) {
+    return { title: 'Service Not Found' };
+  }
+
+  return {
+    title: `${service.title} | Services`,
+    description: service.description,
+    openGraph: {
+      title: `${service.title} | Services | Mohammad Saquib`,
+      description: service.description,
+    },
+    alternates: {
+      canonical: `/service/${slug}`,
+    }
+  };
+}
 
 export default async function ServicePage({
   params,

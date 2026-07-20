@@ -335,7 +335,7 @@ export function AboutContent() {
                   { label: 'Pinterest', icon: 'P', color: 'hover:bg-[#E60023] hover:text-white hover:border-[#E60023]' },
                   { label: 'Instagram', icon: 'Ig', color: 'hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:text-white hover:border-[#dc2743]', link: 'https://www.instagram.com/vismora.studio/' },
                   { label: 'Behance', icon: 'Bē', color: 'hover:bg-[#1769ff] hover:text-white hover:border-[#1769ff]', link: 'https://www.behance.net/ansarisaquib3' },
-                  { label: 'Facebook', icon: 'f', color: 'hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]' },
+                  { label: 'Facebook', icon: 'f', color: 'hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]', link: 'https://www.facebook.com/profile.php?id=61578699250259' },
                   { label: 'Threads', icon: '@', color: 'hover:bg-foreground hover:text-background hover:border-foreground', link: 'https://www.threads.com/@vismora.studio?xmt=AQG0AYavh_ylmxPsIjM51fL1sYuvPBeRacyUdRwd02e_RCU' }
                 ].map((social, i) => (
                   <motion.div key={i} whileHover={{ y: -5 }}>

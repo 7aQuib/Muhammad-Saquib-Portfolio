@@ -76,7 +76,8 @@ const jsonLd = {
     "https://www.facebook.com/profile.php?id=61578699250259",
     "https://x.com/Ansarisaquib19",
     "https://www.behance.net/ansarisaquib3",
-    "https://dribbble.com/muhammad-saquib-ansari"
+    "https://dribbble.com/muhammad-saquib-ansari",
+    "https://in.pinterest.com/mohammadsaquib693/?actingBusinessId=1132936987418857304"
   ]
 };
 

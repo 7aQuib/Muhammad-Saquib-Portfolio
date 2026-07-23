@@ -332,7 +332,7 @@ export function AboutContent() {
               <div className="flex flex-wrap justify-center gap-3">
                 {[
                   { label: 'LinkedIn', icon: 'in', color: 'hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2]', link: 'https://www.linkedin.com/in/muhammad-saquib-ansari-823621381/' },
-                  { label: 'Pinterest', icon: 'P', color: 'hover:bg-[#E60023] hover:text-white hover:border-[#E60023]' },
+                  { label: 'Pinterest', icon: 'P', color: 'hover:bg-[#E60023] hover:text-white hover:border-[#E60023]', link: 'https://in.pinterest.com/mohammadsaquib693/?actingBusinessId=1132936987418857304' },
                   { label: 'Instagram', icon: 'Ig', color: 'hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:text-white hover:border-[#dc2743]', link: 'https://www.instagram.com/vismora.studio/' },
                   { label: 'Behance', icon: 'Bē', color: 'hover:bg-[#1769ff] hover:text-white hover:border-[#1769ff]', link: 'https://www.behance.net/ansarisaquib3' },
                   { label: 'Facebook', icon: 'f', color: 'hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]', link: 'https://www.facebook.com/profile.php?id=61578699250259' },

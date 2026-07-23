@@ -59,7 +59,7 @@ export function About() {
             viewport={{ once: true, margin: "-100px" }}
             className="col-span-1 lg:col-span-5 relative"
           >
-            <div className="relative w-full aspect-[3/4] overflow-hidden bg-card border border-border group">
+            <div className="relative w-full aspect-[3/4] overflow-hidden bg-card border border-border group cursor-none" data-cursor="hover" data-cursor-label="MEET ME">
               <Image
                 src={profileImage}
                 alt="Mohammad Saquib"
@@ -121,7 +121,10 @@ export function About() {
               <motion.div 
                 key={i} 
                 variants={fadeUp} 
-                className="flex flex-col gap-4 group/item hover:!opacity-100 group-hover/list:opacity-30 transition-opacity duration-500 cursor-default"
+                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                className="flex flex-col gap-4 group/item hover:!opacity-100 group-hover/list:opacity-30 transition-all duration-500 cursor-none p-6 -m-6 rounded-2xl hover:bg-card hover:border hover:border-border"
+                data-cursor="hover"
+                data-cursor-label="EXPLORE"
               >
                 <div className="text-xs font-mono text-muted-foreground">0{i + 1}</div>
                 <h4 className="text-3xl md:text-4xl font-display font-medium text-foreground tracking-tight">{cap.title}</h4>
@@ -160,8 +163,8 @@ export function About() {
                 desc: "The final phase is rigorous refinement. Stripping away the unnecessary until only the undeniable remains, delivering a polished, high-end visual identity ready for market."
               }
             ].map((step, i) => (
-              <motion.div key={i} variants={fadeUp} className="relative flex flex-col gap-6">
-                <div className="absolute -left-4 md:-left-12 -top-12 md:-top-20 text-[8rem] md:text-[14rem] font-display font-bold text-foreground/[0.03] select-none pointer-events-none leading-none tracking-tighter">
+              <motion.div key={i} variants={fadeUp} className="relative flex flex-col gap-6 group/step cursor-none p-8 -m-8 rounded-2xl hover:bg-card hover:border hover:border-border transition-colors duration-500" data-cursor="hover" data-cursor-label="PROCESS">
+                <div className="absolute -left-4 md:-left-12 -top-12 md:-top-20 text-[8rem] md:text-[14rem] font-display font-bold text-foreground/[0.03] group-hover/step:text-foreground/[0.08] transition-colors duration-500 select-none pointer-events-none leading-none tracking-tighter">
                   0{i + 1}
                 </div>
                 <h4 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-foreground tracking-tight relative z-10">{step.title}</h4>
@@ -188,9 +191,9 @@ export function About() {
               { value: "100%", label: "Client Satisfaction" },
               { value: "3", label: "Years Experience" },
             ].map((metric, i) => (
-              <motion.div key={i} variants={fadeUp} className="flex flex-col gap-3">
-                <div className="text-5xl md:text-6xl lg:text-8xl font-display font-bold text-foreground tracking-tighter">{metric.value}</div>
-                <div className="text-xs md:text-sm font-sans tracking-[0.2em] text-muted-foreground uppercase">{metric.label}</div>
+              <motion.div key={i} variants={fadeUp} className="flex flex-col gap-3 group/metric cursor-none p-6 -m-6 rounded-2xl hover:bg-card hover:border hover:border-border transition-colors duration-300" data-cursor="hover">
+                <div className="text-5xl md:text-6xl lg:text-8xl font-display font-bold text-foreground tracking-tighter group-hover/metric:text-accent transition-colors duration-300">{metric.value}</div>
+                <div className="text-xs md:text-sm font-sans tracking-[0.2em] text-muted-foreground uppercase group-hover/metric:text-foreground transition-colors duration-300">{metric.label}</div>
               </motion.div>
             ))}
           </div>

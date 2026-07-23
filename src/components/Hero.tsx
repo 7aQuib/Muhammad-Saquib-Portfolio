@@ -3,13 +3,34 @@
 import Image from "next/image";
 import { ArrowDownRight } from "lucide-react";
 import Container from "@/components/ui/Container";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { useRef } from "react";
 import heroImg from "@/Assets/Images/hero-page-banner.png";
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 1000], [0, 300]);
+  const scrollYTransform = useTransform(scrollY, [0, 1000], [0, 300]);
   const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const springConfig = { damping: 25, stiffness: 100, mass: 0.5 };
+  const smoothMouseX = useSpring(mouseX, springConfig);
+  const smoothMouseY = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!sectionRef.current) return;
+    const { clientX, clientY } = e;
+    const { width, height, left, top } = sectionRef.current.getBoundingClientRect();
+    
+    const xPct = (clientX - left - width / 2) / (width / 2);
+    const yPct = (clientY - top - height / 2) / (height / 2);
+
+    mouseX.set(xPct * -15);
+    mouseY.set(yPct * -15);
+  };
 
   const containerVariants = {
     hidden: { },
@@ -47,14 +68,22 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-full bg-background overflow-hidden flex items-center pt-20 md:pt-28">
+    <section 
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => { mouseX.set(0); mouseY.set(0); }}
+      className="relative min-h-full bg-background overflow-hidden flex items-center pt-20 md:pt-28"
+    >
       {/* Background Image Layer (Right Half) */}
       <motion.div
-        style={{ y, opacity }}
+        style={{ y: scrollYTransform, opacity }}
         className="absolute inset-x-0 bottom-0 top-20 md:top-28 grid grid-cols-1 md:grid-cols-2 z-0"
       >
         <div className="hidden md:block" />
-        <div className="relative h-full w-full opacity-60 md:opacity-100">
+        <motion.div 
+          className="relative h-full w-full opacity-60 md:opacity-100 scale-[1.05]"
+          style={{ x: smoothMouseX, y: smoothMouseY }}
+        >
           <Image
             src={heroImg}
             alt="Mohammad Saquib"
@@ -77,7 +106,7 @@ export function Hero() {
 
           {/* Fade bottom edge */}
           <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-background to-transparent" />
-        </div>
+        </motion.div>
       </motion.div>
 
       <Container className="relative z-10 w-full h-full py-24 md:py-0">

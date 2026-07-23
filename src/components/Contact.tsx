@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { Send, CheckCircle2 } from "lucide-react";
 import { sendEnquiry } from "@/app/actions/contact";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 export function Contact() {
   const [isPending, startTransition] = useTransition();
@@ -129,20 +130,22 @@ export function Contact() {
                   </div>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={isPending}
-                  className="w-full bg-brand-gradient text-accent-foreground px-8 py-5 rounded-xl font-bold uppercase tracking-wider border-2 border-border shadow-hard hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--color-border)] transition-all flex items-center justify-center text-lg disabled:opacity-70 disabled:cursor-not-allowed"
-                >
-                  {isPending ? (
-                    <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    <>
-                      Send Enquiry
-                      <Send className="w-6 h-6 ml-3" />
-                    </>
-                  )}
-                </button>
+                <MagneticButton className="w-full">
+                  <button
+                    type="submit"
+                    disabled={isPending}
+                    className="w-full bg-brand-gradient text-accent-foreground px-8 py-5 rounded-xl font-bold uppercase tracking-wider border-2 border-border shadow-hard hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--color-border)] transition-all flex items-center justify-center text-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                  >
+                    {isPending ? (
+                      <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        Send Enquiry
+                        <Send className="w-6 h-6 ml-3" />
+                      </>
+                    )}
+                  </button>
+                </MagneticButton>
               </form>
             )}
           </div>

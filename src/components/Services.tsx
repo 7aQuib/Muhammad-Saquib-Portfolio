@@ -6,6 +6,7 @@ import Container from "@/components/ui/Container";
 import { services } from "@/data/services";
 import { ArrowUpRight } from "lucide-react";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 export function Services() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -119,9 +120,11 @@ export function Services() {
               placeholder="Enter your email" 
               className="px-6 py-4 rounded-xl text-foreground font-sans bg-background border-2 border-border focus:outline-none focus:ring-4 focus:ring-black/20 dark:focus:ring-white/20 min-w-[280px] shadow-inner text-lg"
             />
-            <button className="bg-foreground text-background px-8 py-4 rounded-xl font-bold text-lg border-2 border-transparent hover:border-border shadow-hard hover:shadow-hard-hover hover:-translate-y-1 transition-all whitespace-nowrap">
-              Get Checklist
-            </button>
+            <MagneticButton>
+              <button className="bg-foreground text-background px-8 py-4 rounded-xl font-bold text-lg border-2 border-transparent hover:border-border shadow-hard hover:shadow-hard-hover hover:-translate-y-1 transition-all whitespace-nowrap">
+                Get Checklist
+              </button>
+            </MagneticButton>
           </div>
         </div>
       </Container>

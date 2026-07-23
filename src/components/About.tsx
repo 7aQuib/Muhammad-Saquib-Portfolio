@@ -5,8 +5,33 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import profileImage from "../Assets/Images/Profile.png";
 import Container from "@/components/ui/Container";
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 
 export function About() {
+  const containerRef = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    const cards = gsap.utils.toArray<HTMLDivElement>('.process-card');
+    
+    cards.forEach((card, index) => {
+      // Don't animate the last card
+      if (index === cards.length - 1) return;
+      
+      const nextCard = cards[index + 1];
+      
+      gsap.to(card, {
+        scale: 0.95,
+        filter: "brightness(0.3)",
+        scrollTrigger: {
+          trigger: nextCard,
+          start: "top center", 
+          end: `top top+=${96 + ((index + 1) * 32)}`, // roughly matching the stick offset
+          scrub: true,
+        }
+      });
+    });
+  }, { scope: containerRef });
+
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const } }
@@ -21,7 +46,7 @@ export function About() {
   };
 
   return (
-    <section id="about" className="py-24 md:py-32 lg:py-48 bg-background overflow-hidden relative">
+    <section id="about" ref={containerRef} className="py-24 md:py-32 lg:py-48 bg-background overflow-hidden relative">
       <Container className="space-y-32 md:space-y-48 lg:space-y-64">
         
         {/* 1. About Hero Section */}
@@ -198,21 +223,10 @@ export function About() {
 }
 
 function ProcessCard({ step, index }: { step: { title: string, desc: string }, index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "start 60%"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [150, 0]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
   return (
-    <motion.div 
-      ref={cardRef}
-      style={{ y, opacity }}
-      className="relative flex flex-col gap-6 group/step cursor-none p-8 -m-8 rounded-2xl hover:bg-card hover:border hover:border-border transition-colors duration-500" 
+    <div 
+      className="process-card sticky origin-top relative flex flex-col gap-6 group/step cursor-none p-8 rounded-2xl hover:bg-card hover:border hover:border-border transition-colors duration-500 bg-background border border-transparent shadow-[0_20px_50px_rgba(0,0,0,0.1)] w-full max-w-3xl" 
+      style={{ top: `calc(6rem + ${index * 2}rem)` }}
       data-cursor="hover" 
       data-cursor-label="PROCESS"
     >
@@ -223,6 +237,6 @@ function ProcessCard({ step, index }: { step: { title: string, desc: string }, i
       <p className="text-lg md:text-xl text-muted-foreground font-sans font-light leading-relaxed max-w-2xl relative z-10">
         {step.desc}
       </p>
-    </motion.div>
+    </div>
   );
 }

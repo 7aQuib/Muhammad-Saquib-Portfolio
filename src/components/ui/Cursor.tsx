@@ -5,6 +5,7 @@ import { gsap } from "@/lib/gsap";
 
 export default function Cursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const followerRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -15,8 +16,9 @@ export default function Cursor() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const cursor = cursorRef.current;
+    const follower = followerRef.current;
     const label = labelRef.current;
-    if (!cursor || !label) return;
+    if (!cursor || !follower || !label) return;
 
     // 2. Clamped quickTo for lag-free performance (Max 0.25s duration)
     const xTo = gsap.quickTo(cursor, "x", {
@@ -29,11 +31,23 @@ export default function Cursor() {
       ease: "power3.out",
     });
 
+    const xToFollower = gsap.quickTo(follower, "x", {
+      duration: 0.6,
+      ease: "power3.out",
+    });
+    
+    const yToFollower = gsap.quickTo(follower, "y", {
+      duration: 0.6,
+      ease: "power3.out",
+    });
+
     setIsVisible(true);
 
     const move = (e: MouseEvent) => {
       xTo(e.clientX);
       yTo(e.clientY);
+      xToFollower(e.clientX);
+      yToFollower(e.clientY);
     };
 
     // 3. State Management (Default, Hover, Hidden)
@@ -48,9 +62,11 @@ export default function Cursor() {
         window.getSelection()?.toString().length
       ) {
         gsap.to(cursor, { opacity: 0, duration: 0.2 });
+        gsap.to(follower, { opacity: 0, duration: 0.2 });
         return;
       } else {
         gsap.to(cursor, { opacity: 1, duration: 0.2 });
+        gsap.to(follower, { opacity: 1, duration: 0.2 });
       }
 
       // Hover State logic
@@ -69,6 +85,7 @@ export default function Cursor() {
             duration: 0.3, 
             ease: "power2.out" 
           });
+          gsap.to(follower, { scale: 0, opacity: 0, duration: 0.3 });
 
           if (labelText) {
             label.innerText = labelText;
@@ -84,6 +101,7 @@ export default function Cursor() {
           duration: 0.3, 
           ease: "power2.out" 
         });
+        gsap.to(follower, { scale: 0, opacity: 0, duration: 0.3 });
       }
     };
 
@@ -101,6 +119,7 @@ export default function Cursor() {
           duration: 0.3, 
           ease: "power2.out" 
         });
+        gsap.to(follower, { scale: 1, opacity: 1, duration: 0.3 });
         gsap.to(label, { opacity: 0, duration: 0.2 });
         label.innerText = "";
       }
@@ -109,8 +128,10 @@ export default function Cursor() {
     const handleSelectionChange = () => {
       if (window.getSelection()?.toString().length) {
          gsap.to(cursor, { opacity: 0, duration: 0.2 });
+         gsap.to(follower, { opacity: 0, duration: 0.2 });
       } else {
          gsap.to(cursor, { opacity: 1, duration: 0.2 });
+         gsap.to(follower, { opacity: 1, duration: 0.2 });
       }
     };
 
@@ -130,14 +151,20 @@ export default function Cursor() {
   if (!isVisible) return null;
 
   return (
-    <div
-      ref={cursorRef}
-      className="fixed top-0 left-0 w-4 h-4 bg-white rounded-full pointer-events-none z-[100] mix-blend-difference flex items-center justify-center -translate-x-1/2 -translate-y-1/2 will-change-transform"
-    >
-      <span 
-        ref={labelRef} 
-        className="opacity-0 text-black font-mono text-[10px] font-bold tracking-wider whitespace-nowrap pointer-events-none"
-      ></span>
-    </div>
+    <>
+      <div
+        ref={followerRef}
+        className="fixed top-0 left-0 w-8 h-8 border-[1.5px] border-white/50 rounded-full pointer-events-none z-[99] mix-blend-difference flex items-center justify-center -translate-x-1/2 -translate-y-1/2 will-change-transform"
+      />
+      <div
+        ref={cursorRef}
+        className="fixed top-0 left-0 w-3 h-3 bg-white rounded-full pointer-events-none z-[100] mix-blend-difference flex items-center justify-center -translate-x-1/2 -translate-y-1/2 will-change-transform"
+      >
+        <span 
+          ref={labelRef} 
+          className="opacity-0 text-black font-mono text-[10px] font-bold tracking-wider whitespace-nowrap pointer-events-none"
+        ></span>
+      </div>
+    </>
   );
 }

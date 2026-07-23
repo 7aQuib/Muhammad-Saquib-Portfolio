@@ -5,6 +5,7 @@ import Cursor from "@/components/ui/Cursor";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from "@vercel/analytics/next";
 import { Preloader } from "@/components/Preloader";
+import Spotlight from "@/components/ui/Spotlight";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -94,6 +95,7 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <Preloader />
             <Cursor />
+            <Spotlight />
             {/* SVG Filters for the effect from the original theme */}
             <svg width="0" height="0" style={{ position: "absolute", overflow: "hidden" }} aria-hidden="true">
               <defs>

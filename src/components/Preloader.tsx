@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
 
 export function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
 
   useEffect(() => {
     // Check if we've already played the preloader this session
@@ -17,33 +18,24 @@ export function Preloader() {
     // Lock body scroll
     document.body.style.overflow = "hidden";
 
-    let start = 0;
-    const duration = 2500; // 2.5 seconds
-    const interval = 20;
-    const step = 100 / (duration / interval);
-
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= 100) {
-        setProgress(100);
-        clearInterval(timer);
-        
+    const animation = animate(count, 100, {
+      duration: 2.5,
+      ease: [0.33, 1, 0.68, 1], // Very smooth ease-out curve
+      onComplete: () => {
         // Brief pause at 100 before animating out
         setTimeout(() => {
           setIsLoading(false);
           sessionStorage.setItem("preloader-played", "true");
           document.body.style.overflow = "auto";
-        }, 700); 
-      } else {
-        setProgress(Math.floor(start));
+        }, 600);
       }
-    }, interval);
+    });
 
     return () => {
-      clearInterval(timer);
+      animation.stop();
       document.body.style.overflow = "auto";
     };
-  }, []);
+  }, [count]);
 
   return (
     <AnimatePresence>
@@ -59,8 +51,8 @@ export function Preloader() {
                 key={i}
                 exit={{ y: "-100%" }}
                 transition={{
-                  duration: 0.9,
-                  ease: [0.76, 0, 0.24, 1],
+                  duration: 1.2,
+                  ease: [0.76, 0, 0.24, 1], // Cinematic ease in-out
                   delay: i * 0.1, // Stagger delay for the wipe effect
                 }}
                 className="w-1/4 h-full bg-[#0a0a0a]"
@@ -71,7 +63,7 @@ export function Preloader() {
           {/* Tiny Brand Name (Top Left) */}
           <motion.div
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="absolute top-8 left-8 md:top-12 md:left-12 z-30 font-sans text-xs md:text-sm tracking-[0.4em] text-white/50 uppercase"
           >
             Vismora Studio
@@ -79,12 +71,12 @@ export function Preloader() {
 
           {/* Massive Percentage Counter */}
           <motion.div
-            exit={{ y: "-100%", opacity: 0 }}
-            transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1], delay: 0.15 }}
+            exit={{ y: "-80%", opacity: 0, scale: 0.9 }}
+            transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
             className="relative z-30 font-display font-bold text-white tracking-tighter leading-none flex items-baseline justify-center"
             style={{ fontSize: "clamp(6rem, 25vw, 25rem)" }}
           >
-            {progress}
+            <motion.span>{rounded}</motion.span>
             <span className="text-3xl md:text-6xl lg:text-[6rem] font-sans font-light text-white/50 ml-2 md:ml-4">
               %
             </span>

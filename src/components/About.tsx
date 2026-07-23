@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import profileImage from "../Assets/Images/Profile.png";
 import Container from "@/components/ui/Container";
 
@@ -163,15 +164,7 @@ export function About() {
                 desc: "The final phase is rigorous refinement. Stripping away the unnecessary until only the undeniable remains, delivering a polished, high-end visual identity ready for market."
               }
             ].map((step, i) => (
-              <motion.div key={i} variants={fadeUp} className="relative flex flex-col gap-6 group/step cursor-none p-8 -m-8 rounded-2xl hover:bg-card hover:border hover:border-border transition-colors duration-500" data-cursor="hover" data-cursor-label="PROCESS">
-                <div className="absolute -left-4 md:-left-12 -top-12 md:-top-20 text-[8rem] md:text-[14rem] font-display font-bold text-foreground/[0.03] group-hover/step:text-foreground/[0.08] transition-colors duration-500 select-none pointer-events-none leading-none tracking-tighter">
-                  0{i + 1}
-                </div>
-                <h4 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-foreground tracking-tight relative z-10">{step.title}</h4>
-                <p className="text-lg md:text-xl text-muted-foreground font-sans font-light leading-relaxed max-w-2xl relative z-10">
-                  {step.desc}
-                </p>
-              </motion.div>
+              <ProcessCard key={i} step={step} index={i} />
             ))}
           </div>
         </motion.div>
@@ -201,5 +194,35 @@ export function About() {
 
       </Container>
     </section>
+  );
+}
+
+function ProcessCard({ step, index }: { step: { title: string, desc: string }, index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "start 60%"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [150, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  return (
+    <motion.div 
+      ref={cardRef}
+      style={{ y, opacity }}
+      className="relative flex flex-col gap-6 group/step cursor-none p-8 -m-8 rounded-2xl hover:bg-card hover:border hover:border-border transition-colors duration-500" 
+      data-cursor="hover" 
+      data-cursor-label="PROCESS"
+    >
+      <div className="absolute -left-4 md:-left-12 -top-12 md:-top-20 text-[8rem] md:text-[14rem] font-display font-bold text-foreground/[0.03] group-hover/step:text-foreground/[0.08] transition-colors duration-500 select-none pointer-events-none leading-none tracking-tighter">
+        0{index + 1}
+      </div>
+      <h4 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-foreground tracking-tight relative z-10">{step.title}</h4>
+      <p className="text-lg md:text-xl text-muted-foreground font-sans font-light leading-relaxed max-w-2xl relative z-10">
+        {step.desc}
+      </p>
+    </motion.div>
   );
 }

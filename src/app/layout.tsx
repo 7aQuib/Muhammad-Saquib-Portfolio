@@ -4,6 +4,7 @@ import "./globals.css";
 import Cursor from "@/components/ui/Cursor";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from "@vercel/analytics/next";
+import { Preloader } from "@/components/Preloader";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -91,6 +92,7 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning className="bg-background text-foreground min-h-screen flex flex-col font-sans selection:bg-accent selection:text-white transition-colors duration-500">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <Preloader />
             <Cursor />
             {/* SVG Filters for the effect from the original theme */}
             <svg width="0" height="0" style={{ position: "absolute", overflow: "hidden" }} aria-hidden="true">

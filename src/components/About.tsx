@@ -225,7 +225,7 @@ export function About() {
 function ProcessCard({ step, index }: { step: { title: string, desc: string }, index: number }) {
   return (
     <div 
-      className="process-card sticky origin-top relative flex flex-col gap-6 group/step cursor-none p-8 rounded-2xl hover:bg-card hover:border hover:border-border transition-colors duration-500 bg-background border border-transparent shadow-[0_20px_50px_rgba(0,0,0,0.1)] w-full max-w-3xl" 
+      className="process-card sticky origin-top flex flex-col gap-6 group/step cursor-none p-8 rounded-2xl hover:bg-card hover:border hover:border-border transition-colors duration-500 bg-background border border-transparent shadow-[0_20px_50px_rgba(0,0,0,0.1)] w-full max-w-3xl z-10" 
       style={{ top: `calc(6rem + ${index * 2}rem)` }}
       data-cursor="hover" 
       data-cursor-label="PROCESS"

@@ -4,9 +4,9 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 
 const About = dynamic(() => import("@/components/About").then((mod) => mod.About));
-const BrandMarquee = dynamic(() => import("@/components/BrandMarquee").then((mod) => mod.BrandMarquee));
 const Portfolio = dynamic(() => import("@/components/Portfolio").then((mod) => mod.Portfolio));
 const Services = dynamic(() => import("@/components/Services").then((mod) => mod.Services));
+const Skills = dynamic(() => import("@/components/Skills").then((mod) => mod.Skills));
 const Testimonials = dynamic(() => import("@/components/Testimonials").then((mod) => mod.Testimonials));
 const Contact = dynamic(() => import("@/components/Contact").then((mod) => mod.Contact));
 const Footer = dynamic(() => import("@/components/Footer").then((mod) => mod.Footer));
@@ -29,10 +29,10 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <About />
-        <BrandMarquee />
         <Portfolio />
+        <About />
         <Services />
+        <Skills />
         <Testimonials />
         <Contact />
       </main>

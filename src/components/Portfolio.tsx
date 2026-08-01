@@ -16,30 +16,35 @@ const projects = [
   {
     title: "Identity Design",
     category: "Branding",
+    outcome: "Increased brand recognition by 40% in Q1",
     image: ImgIdentity,
     link: "https://www.behance.net/ansarisaquib3"
   },
   {
     title: "Motion Graphics",
     category: "Animation",
+    outcome: "Boosted social engagement by 300%",
     image: ImgMotion,
     link: "https://www.behance.net/ansarisaquib3"
   },
   {
     title: "Packaging Solution",
     category: "Product",
+    outcome: "Secured placement in 50+ retail stores",
     image: ImgPackaging,
     link: "https://www.behance.net/ansarisaquib3"
   },
   {
     title: "Print Media",
     category: "Editorial",
+    outcome: "Successfully reached 10,000+ local demographics",
     image: ImgPrint,
     link: "https://www.behance.net/ansarisaquib3"
   },
   {
     title: "Social Media Creative",
     category: "Marketing",
+    outcome: "Drove 15% increase in direct conversions",
     image: ImgSocial,
     link: "https://www.behance.net/ansarisaquib3"
   }
@@ -147,9 +152,14 @@ export function Portfolio() {
                 <span className="text-muted-foreground font-mono text-sm lg:text-base font-bold">
                   0{idx + 1}
                 </span>
-                <h3 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold tracking-tighter group-hover:pl-4 lg:group-hover:pl-8 transition-all duration-500 text-foreground group-hover:text-accent">
-                  {project.title}
-                </h3>
+                <div className="flex flex-col group-hover:pl-4 lg:group-hover:pl-8 transition-all duration-500">
+                  <h3 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold tracking-tighter text-foreground group-hover:text-accent">
+                    {project.title}
+                  </h3>
+                  <p className="mt-2 text-sm md:text-base font-sans text-muted-foreground max-w-sm hidden md:block">
+                    {project.outcome}
+                  </p>
+                </div>
               </div>
               <div className="mt-4 lg:mt-0 pl-12 lg:pl-0 flex items-center justify-between lg:justify-end w-full lg:w-auto">
                 <span className="text-muted-foreground font-serif italic text-xl lg:text-2xl group-hover:text-foreground transition-colors duration-300">

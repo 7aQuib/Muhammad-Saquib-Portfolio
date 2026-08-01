@@ -5,6 +5,7 @@ import { ArrowDownRight } from "lucide-react";
 import Container from "@/components/ui/Container";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { useRef } from "react";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 import heroImg from "@/Assets/Images/hero-page-banner.png";
 
 export function Hero() {
@@ -138,16 +139,24 @@ export function Hero() {
                 </div>
               </h1>
 
-              <motion.div variants={itemVariants} className="mt-24 md:mt-32 flex items-center justify-start gap-4 text-muted-foreground group cursor-pointer">
-                <motion.div
-                  animate={{ y: [0, 5, 0] }}
-                  transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                >
-                  <ArrowDownRight className="w-8 h-8 flex-shrink-0 group-hover:text-accent transition-colors" />
-                </motion.div>
-                <p className="font-sans text-xs uppercase tracking-[0.2em] leading-relaxed group-hover:text-foreground transition-colors">
-                  Crafting High-Impact Visual Identities
-                </p>
+              <motion.div variants={itemVariants} className="mt-24 md:mt-32 flex flex-col md:flex-row md:items-center justify-start gap-8 text-muted-foreground group cursor-pointer">
+                <MagneticButton>
+                  <a href="#portfolio" className="bg-foreground text-background px-8 py-4 rounded-xl font-bold uppercase tracking-wider border-2 border-transparent hover:border-border shadow-hard hover:-translate-y-1 transition-all whitespace-nowrap inline-block text-center">
+                    View Selected Works
+                  </a>
+                </MagneticButton>
+                
+                <div className="flex items-center gap-4">
+                  <motion.div
+                    animate={{ y: [0, 5, 0] }}
+                    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                  >
+                    <ArrowDownRight className="w-8 h-8 flex-shrink-0 group-hover:text-accent transition-colors" />
+                  </motion.div>
+                  <p className="font-sans text-xs uppercase tracking-[0.2em] leading-relaxed group-hover:text-foreground transition-colors">
+                    Crafting High-Impact Visual Identities
+                  </p>
+                </div>
               </motion.div>
             </motion.div>
           </div>

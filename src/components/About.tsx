@@ -106,59 +106,18 @@ export function About() {
             className="col-span-1 lg:col-span-7 flex flex-col gap-8 md:gap-10"
           >
             <motion.p variants={fadeUp} className="text-2xl md:text-4xl text-foreground font-sans font-light leading-[1.3] tracking-tight">
-              Specializing in branding, packaging, and high-end visual systems, I partner with ambitious founders to translate complex business objectives into <span className="italic text-muted-foreground">clear, scalable design solutions</span>.
+              My journey started with a simple realization: <span className="italic text-muted-foreground">design isn't just about making things look pretty, it's about solving commercial problems</span>.
             </motion.p>
             <motion.p variants={fadeUp} className="text-lg md:text-xl text-muted-foreground font-sans font-light leading-relaxed">
-              I approach design as a strategic asset, not mere aesthetics. Every decision is rooted in aligning a brand’s visual language with its commercial goals.
+              I grew up fascinated by how specific colors and shapes could make a brand feel instantly trustworthy or entirely forgettable. That curiosity led me to specialize in strategic brand identity and packaging.
             </motion.p>
             <motion.p variants={fadeUp} className="text-lg md:text-xl text-muted-foreground font-sans font-light leading-relaxed">
-              What sets my work apart is a rigorous adherence to minimalism and purpose—stripping away the unnecessary so the core message remains undeniable.
+              Today, I partner with ambitious founders to strip away the noise. I believe in a rigorous adherence to minimalism—designing scalable visual systems that command authority and drive measurable business results.
             </motion.p>
           </motion.div>
         </div>
 
-        {/* 3. Capabilities */}
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="space-y-12 md:space-y-16"
-        >
-          <motion.h3 variants={fadeUp} className="text-xs md:text-sm font-sans tracking-[0.2em] text-muted-foreground uppercase border-b border-border pb-6">
-            Capabilities
-          </motion.h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 group/list">
-            {[
-              {
-                title: "Brand Identity",
-                desc: "Crafting foundational visual systems that position businesses as premium market leaders."
-              },
-              {
-                title: "Packaging Design",
-                desc: "Designing structural and visual packaging that increases shelf impact and drives market share."
-              },
-              {
-                title: "Visual Systems",
-                desc: "Developing scalable design languages that maintain consistency across all digital and physical touchpoints."
-              }
-            ].map((cap, i) => (
-              <motion.div 
-                key={i} 
-                variants={fadeUp} 
-                whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                className="flex flex-col gap-4 group/item hover:!opacity-100 group-hover/list:opacity-30 transition-all duration-500 cursor-none p-6 -m-6 rounded-2xl hover:bg-card hover:border hover:border-border"
-                data-cursor="hover"
-                data-cursor-label="EXPLORE"
-              >
-                <div className="text-xs font-mono text-muted-foreground">0{i + 1}</div>
-                <h4 className="text-3xl md:text-4xl font-display font-medium text-foreground tracking-tight">{cap.title}</h4>
-                <p className="text-base md:text-lg text-muted-foreground font-sans font-light leading-relaxed">{cap.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+
 
         {/* 4. Process */}
         <motion.div 
@@ -194,28 +153,7 @@ export function About() {
           </div>
         </motion.div>
 
-        {/* 5. Proof (Metrics) */}
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="border-t border-b border-border py-16 md:py-24"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-            {[
-              { value: "20+", label: "Successful Projects" },
-              { value: "5+", label: "Industries Scaled" },
-              { value: "100%", label: "Client Satisfaction" },
-              { value: "3", label: "Years Experience" },
-            ].map((metric, i) => (
-              <motion.div key={i} variants={fadeUp} className="flex flex-col gap-3 group/metric cursor-none p-6 -m-6 rounded-2xl hover:bg-card hover:border hover:border-border transition-colors duration-300" data-cursor="hover">
-                <div className="text-5xl md:text-6xl lg:text-8xl font-display font-bold text-foreground tracking-tighter group-hover/metric:text-accent transition-colors duration-300">{metric.value}</div>
-                <div className="text-xs md:text-sm font-sans tracking-[0.2em] text-muted-foreground uppercase group-hover/metric:text-foreground transition-colors duration-300">{metric.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+
 
       </Container>
     </section>

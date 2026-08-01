@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { X, Send, CheckCircle2 } from "lucide-react";
 import { sendEnquiry } from "@/app/actions/contact";
 import { div } from "framer-motion/client";
@@ -14,6 +15,11 @@ export function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
   const [isPending, startTransition] = useTransition();
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Prevent background scrolling when modal is open
   useEffect(() => {
@@ -43,9 +49,9 @@ export function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
     });
   }
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[100]">
       <div
         onClick={onClose}
@@ -191,6 +197,7 @@ export function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

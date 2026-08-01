@@ -171,7 +171,7 @@ export function Contact() {
                     </a>
                     
                     <a 
-                      href="mailto:hello@example.com" 
+                      href="mailto:mohammadsaquib693@gmail.com" 
                       className="w-full sm:w-auto flex items-center justify-center gap-3 bg-card text-foreground px-8 py-4 rounded-xl font-bold uppercase tracking-wider border-2 border-border shadow-hard hover:-translate-y-[2px] hover:shadow-[2px_2px_0px_0px_var(--color-border)] transition-all"
                     >
                       Email Me

@@ -27,7 +27,7 @@ export async function sendEnquiry(formData: FormData) {
       // onboarding@resend.dev is allowed for testing.
       from: "Enquiry Form <onboarding@resend.dev>",
       to: ["mohammadsaquib693@gmail.com"], // Your actual email
-      subject: `New Enquiry from ${name} - ${type}`,
+      subject: `New Project Enquiry from ${name}`,
       html: `
         <div style="font-family: sans-serif; color: #1a1a1a;">
           <h2>New Project Enquiry</h2>

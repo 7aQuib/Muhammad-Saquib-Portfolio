@@ -1,30 +1,51 @@
-import Image from "next/image";
+import fs from "fs";
+import path from "path";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { GalleryGrid } from "@/components/GalleryGrid";
 
 export const metadata = {
   title: "Gallery | Mohammad Saquib",
   description: "A curated collection of static Instagram posts and web banner designs.",
 };
 
-// We generate an array of the user's uploaded images, keeping the strict
-// aspect ratios (1:1, 4:5, 16:9, and 9:16) for masonry rendering.
-const galleryItems = [
-  { id: 1, title: "Year-End Gratitude", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "/images/Design Gallery/15. Year-End Gratitude Post.png" },
-  { id: 2, title: "Hydration Goals", category: "Instagram Story (9:16)", width: 900, height: 1600, imgUrl: "/images/Design Gallery/2. [Post] Hydration Goals, Upgraded.jpg" },
-  { id: 3, title: "Amazon Banner", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "/images/Design Gallery/Amazon Banner Image.jpg" },
-  { id: 4, title: "Guava Everyday", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "/images/Design Gallery/5. Guava – Easy Everyday Choice.png" },
-  { id: 5, title: "Hero Banner", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "/images/Design Gallery/Hero Banner.png" },
-  { id: 6, title: "Education & Honesty", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "/images/Design Gallery/Day 18 – Education + Honesty (Carousel).png" },
-  { id: 7, title: "Diwali Orange Juice", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "/images/Design Gallery/Diwali Ornage Juice.jpg" },
-  { id: 8, title: "Brand Store", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "/images/Design Gallery/Brand Store.png" },
-  { id: 9, title: "Juice For Your Mood", category: "Instagram Reel (9:16)", width: 900, height: 1600, imgUrl: "/images/Design Gallery/Juice_ForYour_Mood.jpg" },
-  { id: 10, title: "Constitution Day", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "/images/Design Gallery/Freedom to Choose Better” – Constitution Day.png" },
-  { id: 11, title: "Independence Day", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "/images/Design Gallery/Happy Independence Day.png" },
-  { id: 12, title: "World Photography Day", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "/images/Design Gallery/World Photography Day.jpg" },
-];
+// Next.js Server Component that reads the file system directly.
+// This allows us to dynamically load all images uploaded to the folder.
+export default async function GalleryPage() {
+  // Define the path to the images folder
+  const galleryDirectory = path.join(process.cwd(), "public", "images", "Design Gallery");
+  
+  let imageFiles: string[] = [];
 
-export default function GalleryPage() {
+  try {
+    // Read all files in the directory
+    const files = fs.readdirSync(galleryDirectory);
+    
+    // Filter out only valid image formats (png, jpg, jpeg, webp)
+    imageFiles = files.filter(file => {
+      const ext = path.extname(file).toLowerCase();
+      return [".png", ".jpg", ".jpeg", ".webp"].includes(ext);
+    });
+  } catch (error) {
+    console.error("Error reading gallery directory:", error);
+  }
+
+  // Map the filenames to the GalleryItem format expected by the frontend
+  const galleryItems = imageFiles.map((filename, index) => {
+    // We must encode the URI to handle spaces and special characters in filenames
+    const encodedPath = encodeURI(`/images/Design Gallery/${filename}`);
+    
+    // Format the title by removing the extension and some cleanup
+    const cleanTitle = filename.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+
+    return {
+      id: index + 1,
+      title: cleanTitle,
+      category: "Design Portfolio", // Generic category since we don't know the exact context automatically
+      imgUrl: encodedPath,
+    };
+  });
+
   return (
     <main className="min-h-screen pt-32 pb-20 px-6 sm:px-12 md:px-20 lg:px-32 relative overflow-hidden">
       {/* Background Decorative Elements */}
@@ -48,44 +69,8 @@ export default function GalleryPage() {
         </p>
       </div>
 
-      {/* Strict Ratio Masonry Layout */}
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-          {galleryItems.map((item) => (
-            <div 
-              key={item.id} 
-              className="break-inside-avoid relative group rounded-2xl overflow-hidden bg-card border border-border/50 shadow-soft cursor-pointer"
-            >
-              {/* Image Container mapped strictly to 1:1, 4:5, or 16:9 */}
-              <div className="relative w-full overflow-hidden" style={{ aspectRatio: `${item.width} / ${item.height}` }}>
-                <img 
-                  src={item.imgUrl} 
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-                
-                {/* Dark Overlay on Hover */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                  <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    <p className="text-accent font-mono text-[10px] font-bold uppercase tracking-widest mb-2">
-                      {item.category}
-                    </p>
-                    <h3 className="text-white font-display text-xl sm:text-2xl leading-tight">
-                      {item.title}
-                    </h3>
-                  </div>
-                  
-                  {/* Top Right Icon */}
-                  <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                    <ExternalLink className="w-4 h-4 text-white" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Render the Client Component Grid with Infinite Scroll */}
+      <GalleryGrid initialItems={galleryItems} />
       
       {/* Call to Action Footer */}
       <div className="max-w-7xl mx-auto mt-32 text-center relative z-10">

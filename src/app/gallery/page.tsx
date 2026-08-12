@@ -7,21 +7,21 @@ export const metadata = {
   description: "A curated collection of static Instagram posts and web banner designs.",
 };
 
-// We generate an array of placeholder objects with random heights
-// to properly demonstrate the masonry (Pinterest-style) layout.
+// We generate an array of placeholder objects with strict aspect ratios
+// (1:1, 4:5, and 16:9) as requested for Instagram and web banners.
 const galleryItems = [
-  { id: 1, title: "Social Campaign", category: "Instagram Post", height: 600, imgUrl: "https://picsum.photos/seed/1/800/600" },
-  { id: 2, title: "Summer Sale", category: "Web Banner", height: 400, imgUrl: "https://picsum.photos/seed/2/800/400" },
-  { id: 3, title: "Product Launch", category: "Instagram Story", height: 900, imgUrl: "https://picsum.photos/seed/3/800/900" },
-  { id: 4, title: "Brand Awareness", category: "Carousel", height: 500, imgUrl: "https://picsum.photos/seed/4/800/500" },
-  { id: 5, title: "Tech Conf Banner", category: "Web Banner", height: 350, imgUrl: "https://picsum.photos/seed/5/800/350" },
-  { id: 6, title: "Client Review", category: "Instagram Post", height: 800, imgUrl: "https://picsum.photos/seed/6/800/800" },
-  { id: 7, title: "Giveaway Contest", category: "Instagram Post", height: 650, imgUrl: "https://picsum.photos/seed/7/800/650" },
-  { id: 8, title: "Holiday Special", category: "Web Banner", height: 300, imgUrl: "https://picsum.photos/seed/8/800/300" },
-  { id: 9, title: "Team Culture", category: "Instagram Reel Cover", height: 1000, imgUrl: "https://picsum.photos/seed/9/800/1000" },
-  { id: 10, title: "Minimalist Promo", category: "Instagram Post", height: 800, imgUrl: "https://picsum.photos/seed/10/800/800" },
-  { id: 11, title: "Black Friday", category: "Web Banner", height: 450, imgUrl: "https://picsum.photos/seed/11/800/450" },
-  { id: 12, title: "Typographic Art", category: "Poster", height: 900, imgUrl: "https://picsum.photos/seed/12/800/900" },
+  { id: 1, title: "Social Campaign", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "https://picsum.photos/seed/1/800/800" },
+  { id: 2, title: "Product Launch", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "https://picsum.photos/seed/2/800/1000" },
+  { id: 3, title: "Summer Sale", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/3/800/450" },
+  { id: 4, title: "Brand Awareness", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "https://picsum.photos/seed/4/800/1000" },
+  { id: 5, title: "Tech Conf Banner", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/5/800/450" },
+  { id: 6, title: "Client Review", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "https://picsum.photos/seed/6/800/800" },
+  { id: 7, title: "Giveaway Contest", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "https://picsum.photos/seed/7/800/1000" },
+  { id: 8, title: "Holiday Special", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/8/800/450" },
+  { id: 9, title: "Team Culture", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "https://picsum.photos/seed/9/800/800" },
+  { id: 10, title: "Minimalist Promo", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "https://picsum.photos/seed/10/800/1000" },
+  { id: 11, title: "Black Friday", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/11/800/450" },
+  { id: 12, title: "Typographic Art", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "https://picsum.photos/seed/12/800/800" },
 ];
 
 export default function GalleryPage() {
@@ -48,11 +48,7 @@ export default function GalleryPage() {
         </p>
       </div>
 
-      {/* Masonry Grid */}
-      {/* 
-        Tailwind columns approach is perfect for Pinterest-style masonry grids.
-        It naturally flows items down columns and requires zero JS overhead.
-      */}
+      {/* Strict Ratio Masonry Layout */}
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
           {galleryItems.map((item) => (
@@ -60,12 +56,8 @@ export default function GalleryPage() {
               key={item.id} 
               className="break-inside-avoid relative group rounded-2xl overflow-hidden bg-card border border-border/50 shadow-soft cursor-pointer"
             >
-              {/* Image Container */}
-              <div className="relative w-full overflow-hidden" style={{ aspectRatio: `800 / ${item.height}` }}>
-                {/* 
-                  Using a standard <img> tag here for external placeholders to avoid next.config.js domain issues. 
-                  When replacing with your own images from the public folder, swap this to <Image src={...} fill /> 
-                */}
+              {/* Image Container mapped strictly to 1:1, 4:5, or 16:9 */}
+              <div className="relative w-full overflow-hidden" style={{ aspectRatio: `${item.width} / ${item.height}` }}>
                 <img 
                   src={item.imgUrl} 
                   alt={item.title}

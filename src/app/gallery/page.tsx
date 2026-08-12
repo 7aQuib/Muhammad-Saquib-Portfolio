@@ -7,21 +7,21 @@ export const metadata = {
   description: "A curated collection of static Instagram posts and web banner designs.",
 };
 
-// We generate an array of placeholder objects with strict aspect ratios
-// (1:1, 4:5, 16:9, and 9:16) as requested for Instagram and web banners.
+// We generate an array of the user's uploaded images, keeping the strict
+// aspect ratios (1:1, 4:5, 16:9, and 9:16) for masonry rendering.
 const galleryItems = [
-  { id: 1, title: "Social Campaign", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "https://picsum.photos/seed/1/800/800" },
-  { id: 2, title: "Product Launch", category: "Instagram Story (9:16)", width: 900, height: 1600, imgUrl: "https://picsum.photos/seed/2/900/1600" },
-  { id: 3, title: "Summer Sale", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/3/800/450" },
-  { id: 4, title: "Brand Awareness", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "https://picsum.photos/seed/4/800/1000" },
-  { id: 5, title: "Tech Conf Banner", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/5/800/450" },
-  { id: 6, title: "Client Review", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "https://picsum.photos/seed/6/800/800" },
-  { id: 7, title: "Giveaway Contest", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "https://picsum.photos/seed/7/800/1000" },
-  { id: 8, title: "Holiday Special", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/8/800/450" },
-  { id: 9, title: "Team Culture", category: "Instagram Reel (9:16)", width: 900, height: 1600, imgUrl: "https://picsum.photos/seed/9/900/1600" },
-  { id: 10, title: "Minimalist Promo", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "https://picsum.photos/seed/10/800/1000" },
-  { id: 11, title: "Black Friday", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/11/800/450" },
-  { id: 12, title: "Typographic Art", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "https://picsum.photos/seed/12/800/800" },
+  { id: 1, title: "Year-End Gratitude", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "/images/Design Gallery/15. Year-End Gratitude Post.png" },
+  { id: 2, title: "Hydration Goals", category: "Instagram Story (9:16)", width: 900, height: 1600, imgUrl: "/images/Design Gallery/2. [Post] Hydration Goals, Upgraded.jpg" },
+  { id: 3, title: "Amazon Banner", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "/images/Design Gallery/Amazon Banner Image.jpg" },
+  { id: 4, title: "Guava Everyday", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "/images/Design Gallery/5. Guava – Easy Everyday Choice.png" },
+  { id: 5, title: "Hero Banner", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "/images/Design Gallery/Hero Banner.png" },
+  { id: 6, title: "Education & Honesty", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "/images/Design Gallery/Day 18 – Education + Honesty (Carousel).png" },
+  { id: 7, title: "Diwali Orange Juice", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "/images/Design Gallery/Diwali Ornage Juice.jpg" },
+  { id: 8, title: "Brand Store", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "/images/Design Gallery/Brand Store.png" },
+  { id: 9, title: "Juice For Your Mood", category: "Instagram Reel (9:16)", width: 900, height: 1600, imgUrl: "/images/Design Gallery/Juice_ForYour_Mood.jpg" },
+  { id: 10, title: "Constitution Day", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "/images/Design Gallery/Freedom to Choose Better” – Constitution Day.png" },
+  { id: 11, title: "Independence Day", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "/images/Design Gallery/Happy Independence Day.png" },
+  { id: 12, title: "World Photography Day", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "/images/Design Gallery/World Photography Day.jpg" },
 ];
 
 export default function GalleryPage() {

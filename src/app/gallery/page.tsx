@@ -8,17 +8,17 @@ export const metadata = {
 };
 
 // We generate an array of placeholder objects with strict aspect ratios
-// (1:1, 4:5, and 16:9) as requested for Instagram and web banners.
+// (1:1, 4:5, 16:9, and 9:16) as requested for Instagram and web banners.
 const galleryItems = [
   { id: 1, title: "Social Campaign", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "https://picsum.photos/seed/1/800/800" },
-  { id: 2, title: "Product Launch", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "https://picsum.photos/seed/2/800/1000" },
+  { id: 2, title: "Product Launch", category: "Instagram Story (9:16)", width: 900, height: 1600, imgUrl: "https://picsum.photos/seed/2/900/1600" },
   { id: 3, title: "Summer Sale", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/3/800/450" },
   { id: 4, title: "Brand Awareness", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "https://picsum.photos/seed/4/800/1000" },
   { id: 5, title: "Tech Conf Banner", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/5/800/450" },
   { id: 6, title: "Client Review", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "https://picsum.photos/seed/6/800/800" },
   { id: 7, title: "Giveaway Contest", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "https://picsum.photos/seed/7/800/1000" },
   { id: 8, title: "Holiday Special", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/8/800/450" },
-  { id: 9, title: "Team Culture", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "https://picsum.photos/seed/9/800/800" },
+  { id: 9, title: "Team Culture", category: "Instagram Reel (9:16)", width: 900, height: 1600, imgUrl: "https://picsum.photos/seed/9/900/1600" },
   { id: 10, title: "Minimalist Promo", category: "Instagram Post (4:5)", width: 800, height: 1000, imgUrl: "https://picsum.photos/seed/10/800/1000" },
   { id: 11, title: "Black Friday", category: "Web Banner (16:9)", width: 800, height: 450, imgUrl: "https://picsum.photos/seed/11/800/450" },
   { id: 12, title: "Typographic Art", category: "Instagram Post (1:1)", width: 800, height: 800, imgUrl: "https://picsum.photos/seed/12/800/800" },

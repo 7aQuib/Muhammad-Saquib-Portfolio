@@ -11,14 +11,16 @@ interface GalleryItem {
 }
 
 export function GalleryGrid({ initialItems }: { initialItems: GalleryItem[] }) {
-  const [displayedItems, setDisplayedItems] = useState<GalleryItem[]>([]);
-  const [page, setPage] = useState(1);
   const itemsPerPage = 12;
+  const [displayedItems, setDisplayedItems] = useState<GalleryItem[]>(
+    initialItems.slice(0, itemsPerPage)
+  );
+  const [page, setPage] = useState(1);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  // Initialize first batch
+  // Keep in sync if initialItems completely changes (e.g. route navigation)
   useEffect(() => {
-    setDisplayedItems(initialItems.slice(0, itemsPerPage));
+    setDisplayedItems(initialItems.slice(0, page * itemsPerPage));
   }, [initialItems]);
 
   // Intersection Observer for Infinite Scroll

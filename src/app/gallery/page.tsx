@@ -9,6 +9,10 @@ export const metadata = {
   description: "A curated collection of static Instagram posts and web banner designs.",
 };
 
+// Force dynamic rendering so the page re-reads the filesystem on every request.
+// This is essential so new images appear immediately without a full rebuild.
+export const dynamic = 'force-dynamic';
+
 // Next.js Server Component that reads the file system directly.
 // This allows us to dynamically load all images uploaded to the folder.
 export default async function GalleryPage() {

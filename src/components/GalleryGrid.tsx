@@ -12,23 +12,24 @@ interface GalleryItem {
 
 export function GalleryGrid({ initialItems }: { initialItems: GalleryItem[] }) {
   const [itemsToShow, setItemsToShow] = useState(12);
-  const loadMoreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setItemsToShow((prev) => Math.min(prev + 12, initialItems.length));
-        }
-      },
-      { rootMargin: "400px" } // trigger 400px before the user actually hits the bottom
-    );
+    const handleScroll = () => {
+      // Check if user has scrolled near the bottom of the page (within 500px)
+      const isNearBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 500;
 
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
-    }
+      if (isNearBottom) {
+        setItemsToShow((prev) => Math.min(prev + 12, initialItems.length));
+      }
+    };
 
-    return () => observer.disconnect();
+    window.addEventListener("scroll", handleScroll);
+    // Initial check just in case the screen is huge and doesn't need scrolling to hit the bottom
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [initialItems.length]);
 
   const displayedItems = initialItems.slice(0, itemsToShow);
@@ -68,7 +69,7 @@ export function GalleryGrid({ initialItems }: { initialItems: GalleryItem[] }) {
 
       {/* Loading trigger at bottom */}
       {itemsToShow < initialItems.length && (
-        <div ref={loadMoreRef} className="h-20 w-full mt-10 flex items-center justify-center">
+        <div className="h-20 w-full mt-10 flex items-center justify-center">
           <div className="w-6 h-6 border-2 border-accent border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}

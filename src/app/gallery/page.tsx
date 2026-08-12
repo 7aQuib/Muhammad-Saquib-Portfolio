@@ -1,54 +1,16 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { GalleryGrid } from "@/components/GalleryGrid";
+import galleryItemsData from "@/data/galleryImages.json";
 
 export const metadata = {
   title: "Gallery | Mohammad Saquib",
   description: "A curated collection of static Instagram posts and web banner designs.",
 };
 
-// Force dynamic rendering so the page re-reads the filesystem on every request.
-// This is essential so new images appear immediately without a full rebuild.
-export const dynamic = 'force-dynamic';
-
-// Next.js Server Component that reads the file system directly.
-// This allows us to dynamically load all images uploaded to the folder.
-export default async function GalleryPage() {
-  // Define the path to the images folder
-  const galleryDirectory = path.join(process.cwd(), "public", "images", "Design Gallery");
-  
-  let imageFiles: string[] = [];
-
-  try {
-    // Read all files in the directory
-    const files = fs.readdirSync(galleryDirectory);
-    
-    // Filter out only valid image formats (png, jpg, jpeg, webp)
-    imageFiles = files.filter(file => {
-      const ext = path.extname(file).toLowerCase();
-      return [".png", ".jpg", ".jpeg", ".webp"].includes(ext);
-    });
-  } catch (error) {
-    console.error("Error reading gallery directory:", error);
-  }
-
-  // Map the filenames to the GalleryItem format expected by the frontend
-  const galleryItems = imageFiles.map((filename, index) => {
-    // We must encode the URI to handle spaces and special characters in filenames
-    const encodedPath = encodeURI(`/images/Design Gallery/${filename}`);
-    
-    // Format the title by removing the extension and some cleanup
-    const cleanTitle = filename.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
-
-    return {
-      id: index + 1,
-      title: cleanTitle,
-      category: "Design Portfolio", // Generic category since we don't know the exact context automatically
-      imgUrl: encodedPath,
-    };
-  });
+export default function GalleryPage() {
+  // Use the pre-generated JSON data built by scripts/generateGallery.mjs
+  const galleryItems = galleryItemsData;
 
   return (
     <main className="min-h-screen pt-32 pb-20 px-6 sm:px-12 md:px-20 lg:px-32 relative overflow-hidden">

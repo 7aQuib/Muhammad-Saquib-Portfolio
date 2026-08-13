@@ -48,6 +48,8 @@ const VerticalTree = ({ nodes }: { nodes: DeliverableNode[] }) => {
         >
           <div 
             className={`flex items-center gap-2 group relative z-10 ${isExpandable ? 'cursor-pointer' : 'cursor-default'}`}
+            data-cursor={isExpandable ? "hover" : undefined}
+            data-cursor-label={isExpandable ? "Open" : undefined}
             onClick={(e) => {
               if (isExpandable) {
                 e.stopPropagation();
@@ -93,13 +95,26 @@ export default function DeliverablesTree({ data }: { data: DeliverableTreeData }
   if (!data || !data.topLevelFolders) return null;
 
   return (
-    <div className="w-full bg-[#EBE7DF] dark:bg-card border-2 border-border p-8 md:p-16 rounded-[2rem] shadow-hard overflow-x-auto custom-scrollbar">
-      <div className="min-w-[800px] flex flex-col items-center">
+    <div className="w-full bg-transparent border-2 border-border/50 p-6 md:p-16 rounded-[2rem] overflow-hidden">
+      
+      {/* --- MOBILE LAYOUT (Vertical Tree) --- */}
+      <div className="block md:hidden w-full">
+        <div className="flex items-center gap-3 mb-6 pb-6 border-b border-border/50">
+          <div className="text-foreground/70 scale-125"><FolderIcon /></div>
+          <h3 className="font-mono text-sm tracking-widest uppercase font-bold text-foreground">{data.rootName}</h3>
+        </div>
+        <div className="-ml-2">
+          <VerticalTree nodes={data.topLevelFolders} />
+        </div>
+      </div>
+
+      {/* --- DESKTOP LAYOUT (Horizontal Spread) --- */}
+      <div className="hidden md:flex min-w-[800px] flex-col items-center overflow-x-auto custom-scrollbar pb-8">
         
         {/* Root Node */}
         <div className="flex flex-col items-center gap-2 mb-8 relative">
           <div className="text-foreground/70 scale-[1.3]"><FolderIcon /></div>
-          <h3 className="font-mono text-sm md:text-base tracking-widest uppercase font-bold text-foreground mt-2">{data.rootName}</h3>
+          <h3 className="font-mono text-base tracking-widest uppercase font-bold text-foreground mt-2">{data.rootName}</h3>
           
           {/* Trunk line down from root */}
           <div className="absolute top-full left-1/2 -translate-x-1/2 w-[1px] h-8 bg-border" />
@@ -118,6 +133,8 @@ export default function DeliverablesTree({ data }: { data: DeliverableTreeData }
             <div 
               key={idx} 
               className="relative flex flex-col items-start cursor-pointer group"
+              data-cursor="hover"
+              data-cursor-label="Open"
               onClick={() => setOpenTopFolderIdx(isOpen ? null : idx)}
             >
               

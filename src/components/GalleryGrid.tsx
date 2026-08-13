@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { ExternalLink, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface GalleryItem {
   id: number;
@@ -14,9 +15,16 @@ function GalleryItemCard({ item, onClick }: { item: GalleryItem; onClick: () => 
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div 
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.4 }}
       onClick={onClick}
-      className={`break-inside-avoid relative group rounded-2xl overflow-hidden border border-border/50 shadow-soft cursor-pointer transition-colors duration-500 ${
+      data-cursor="hover"
+      data-cursor-label="View"
+      className={`break-inside-avoid relative group rounded-2xl overflow-hidden border border-border/50 shadow-soft transition-colors duration-500 mb-6 ${
         !isLoaded ? "bg-white/5 animate-pulse min-h-[250px]" : "bg-card"
       }`}
     >
@@ -46,7 +54,7 @@ function GalleryItemCard({ item, onClick }: { item: GalleryItem; onClick: () => 
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 
@@ -90,15 +98,18 @@ export function GalleryGrid({ initialItems }: { initialItems: GalleryItem[] }) {
   return (
     <>
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-          {displayedItems.map((item) => (
-            <GalleryItemCard 
-              key={item.id} 
-              item={item} 
-              onClick={() => setSelectedImage(item)} 
-            />
-          ))}
-        </div>
+
+        <motion.div layout className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6">
+          <AnimatePresence>
+            {displayedItems.map((item) => (
+              <GalleryItemCard 
+                key={item.id} 
+                item={item} 
+                onClick={() => setSelectedImage(item)} 
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {/* Loading trigger at bottom */}
         {itemsToShow < initialItems.length && (
@@ -109,24 +120,37 @@ export function GalleryGrid({ initialItems }: { initialItems: GalleryItem[] }) {
       </div>
 
       {/* Fullscreen Lightbox Modal */}
-      {selectedImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/95 backdrop-blur-sm animate-in fade-in duration-300">
-          <button 
-            onClick={() => setSelectedImage(null)}
-            className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-[60]"
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/95 backdrop-blur-sm"
           >
-            <X className="w-6 h-6" />
-          </button>
-          
-          <div className="relative w-full h-full max-w-6xl max-h-full flex items-center justify-center animate-in zoom-in-95 duration-300">
-            <img 
-              src={selectedImage.imgUrl} 
-              alt={selectedImage.title}
-              className="max-w-full max-h-full object-contain rounded-md shadow-2xl"
-            />
-          </div>
-        </div>
-      )}
+            <button 
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-[60]"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full h-full max-w-6xl max-h-full flex items-center justify-center"
+            >
+              <img 
+                src={selectedImage.imgUrl} 
+                alt={selectedImage.title}
+                className="max-w-full max-h-full object-contain rounded-md shadow-2xl"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

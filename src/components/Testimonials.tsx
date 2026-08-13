@@ -6,25 +6,31 @@ import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { ReviewModal } from "./ReviewModal";
 
-// Static fallback testimonials
+// Static fallback testimonials for Indian Audience (English & Hinglish)
 const initialTestimonials = [
   {
-    quote: "The branding they created completely transformed our business. We saw a 40% increase in conversions within the first month of launching the new visual identity.",
-    author: "Sarah Jenkins",
-    role: "Founder, Bloom Cosmetics",
-    image: "https://i.pravatar.cc/150?img=1"
+    quote: "Bhai, what a transformation! The branding completely changed how our customers perceive us. Conversion rates straight up 40% badh gaye pehle mahine mein hi. Ek number kaam!",
+    author: "Rahul Sharma",
+    role: "Founder, Chai & Co.",
+    image: "https://api.dicebear.com/7.x/notionists/svg?seed=Rahul&backgroundColor=e5e5e5"
   },
   {
-    quote: "Absolutely brilliant work on our packaging design. It stands out on the shelves and we've received endless compliments from our customers.",
-    author: "Marcus Chen",
-    role: "CEO, Artisan Coffee Co.",
-    image: "https://i.pravatar.cc/150?img=11"
+    quote: "Absolutely brilliant work on our packaging design. Shelves pe alag hi dikhta hai hamara product ab. We've received endless compliments from retailers and customers alike.",
+    author: "Priya Desai",
+    role: "CEO, Organic Roots",
+    image: "https://api.dicebear.com/7.x/notionists/svg?seed=Priya&backgroundColor=e5e5e5"
   },
   {
-    quote: "The social media kit is a lifesaver. It takes us minutes instead of hours to create stunning posts that perfectly align with our brand.",
-    author: "Elena Rodriguez",
-    role: "Marketing Director, TechStart",
-    image: "https://i.pravatar.cc/150?img=5"
+    quote: "The social media kit is a total lifesaver. Pehle ghanto lagte the post banane mein, ab within minutes stunning posts ready ho jaate hain. Highly recommended!",
+    author: "Arjun Verma",
+    role: "Marketing Head, TechStart India",
+    image: "https://api.dicebear.com/7.x/notionists/svg?seed=Arjun&backgroundColor=e5e5e5"
+  },
+  {
+    quote: "Top-notch quality! Typography aur modern aesthetics ki understanding inki next level hai. Our brand finally looks premium and trustworthy in the market.",
+    author: "Neha Kapoor",
+    role: "Creative Director, Studio Aura",
+    image: "https://api.dicebear.com/7.x/notionists/svg?seed=Neha&backgroundColor=e5e5e5"
   }
 ];
 

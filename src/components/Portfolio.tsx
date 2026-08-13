@@ -18,35 +18,35 @@ const projects = [
     category: "Branding",
     outcome: "Increased brand recognition by 40% in Q1",
     image: ImgIdentity,
-    link: "https://www.behance.net/ansarisaquib3"
+    link: "/project/identity-design"
   },
   {
     title: "Motion Graphics",
     category: "Animation",
     outcome: "Boosted social engagement by 300%",
     image: ImgMotion,
-    link: "https://www.behance.net/ansarisaquib3"
+    link: "/project/motion-graphics"
   },
   {
     title: "Packaging Solution",
     category: "Product",
     outcome: "Secured placement in 50+ retail stores",
     image: ImgPackaging,
-    link: "https://www.behance.net/ansarisaquib3"
+    link: "/project/packaging-solution"
   },
   {
     title: "Print Media",
     category: "Editorial",
     outcome: "Successfully reached 10,000+ local demographics",
     image: ImgPrint,
-    link: "https://www.behance.net/ansarisaquib3"
+    link: "/project/print-media"
   },
   {
     title: "Social Media Creative",
     category: "Marketing",
     outcome: "Drove 15% increase in direct conversions",
     image: ImgSocial,
-    link: "https://www.behance.net/ansarisaquib3"
+    link: "/project/social-media-creative"
   }
 ];
 
@@ -142,9 +142,9 @@ export function Portfolio() {
             <Link 
               key={idx}
               href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative flex flex-col lg:flex-row lg:items-center justify-between py-10 lg:py-16 border-b-2 border-border transition-colors hover:bg-muted/30 px-4 lg:px-8 -mx-4 lg:-mx-8 cursor-pointer"
+              data-cursor="hover"
+              data-cursor-label="View"
+              className="group relative flex flex-col lg:flex-row lg:items-center justify-between py-10 lg:py-16 border-b-2 border-border transition-colors hover:bg-muted/30 px-4 lg:px-8 -mx-4 lg:-mx-8"
               onMouseEnter={() => setActiveIndex(idx)}
               onMouseLeave={() => setActiveIndex(null)}
             >

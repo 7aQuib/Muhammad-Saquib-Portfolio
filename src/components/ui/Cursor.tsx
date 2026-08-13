@@ -95,8 +95,8 @@ export default function Cursor() {
       } else if (isClickable) {
         gsap.to(cursor, { 
           scale: 2.5, 
-          backgroundColor: "transparent",
-          border: "1px solid white",
+          backgroundColor: "white",
+          border: "none",
           mixBlendMode: "difference",
           duration: 0.3, 
           ease: "power2.out" 

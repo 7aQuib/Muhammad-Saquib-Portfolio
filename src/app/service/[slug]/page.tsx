@@ -282,28 +282,21 @@ export default async function ServicePage({
                 </p>
               </div>
           
-              {/* Meta Block */}
+              {/* Meta Block - Discovery Call CTA */}
               <div className="col-span-12 md:col-span-4 md:col-start-9 mt-svc-2xl flex flex-col items-start md:items-end">
-                <div className="bg-black/5 dark:bg-white/5 border border-border p-6 rounded-[2rem] w-full max-w-sm relative overflow-hidden shadow-sm">
-                  <div className="absolute top-0 right-0 bg-accent text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-widest shadow-sm">
-                    Freelance Advantage
-                  </div>
-                  <div className="text-sm font-mono text-muted-foreground uppercase tracking-widest mb-1 mt-2">
-                    Your Investment
-                  </div>
-                  <div className="text-4xl font-bold font-display text-foreground mb-2">
-                    {service.basePrice}
-                  </div>
-                  {service.maxPrice !== "Variable" && (
-                    <div className="text-sm font-sans text-muted-foreground flex items-center gap-2">
-                      <span>Agency Equivalent:</span>
-                      <span className="line-through opacity-60 font-mono text-foreground">{service.maxPrice}</span>
-                    </div>
-                  )}
+                <div className="bg-black/5 dark:bg-white/5 border border-border p-8 rounded-[2rem] w-full max-w-sm relative overflow-hidden shadow-sm flex flex-col items-start md:items-center text-left md:text-center">
+                  <h3 className="text-3xl font-display font-bold text-foreground mb-3 mt-4">
+                    Ready to Start?
+                  </h3>
+                  <p className="font-sans text-muted-foreground mb-8">
+                    Book a free 1-on-1 strategy call to discuss your vision and see if we're a good fit.
+                  </p>
+                  <MagneticButton>
+                    <Link href="mailto:mohammadsaquib693@gmail.com" className="svc-btn !bg-accent !text-accent-foreground w-full">
+                      Schedule a Discovery Call
+                    </Link>
+                  </MagneticButton>
                 </div>
-                <p className="font-sans text-sm text-muted-foreground mt-4 text-left md:text-right w-full max-w-sm">
-                  *Transparent pricing. Get premium agency-level quality without the massive agency overheads.
-                </p>
               </div>
           
             </div>

@@ -20,20 +20,52 @@ try {
     fs.mkdirSync(galleryDirectory, { recursive: true });
   }
 
-  const files = fs.readdirSync(galleryDirectory);
+  const validExts = [".png", ".jpg", ".jpeg", ".webp"];
   
-  const imageFiles = files.filter(file => {
-    const ext = path.extname(file).toLowerCase();
-    return [".png", ".jpg", ".jpeg", ".webp"].includes(ext);
-  });
+  function walkDir(currentPath) {
+    let results = [];
+    const files = fs.readdirSync(currentPath);
+    for (const file of files) {
+      const fullPath = path.join(currentPath, file);
+      const stat = fs.statSync(fullPath);
+      if (stat.isDirectory()) {
+        results = results.concat(walkDir(fullPath));
+      } else {
+        const ext = path.extname(file).toLowerCase();
+        if (validExts.includes(ext)) {
+          results.push(fullPath);
+        }
+      }
+    }
+    return results;
+  }
 
-  const galleryItems = imageFiles.map((filename, index) => {
+  const allImageFiles = walkDir(galleryDirectory);
+
+  const galleryItems = allImageFiles.map((fullPath, index) => {
+    const relativePath = path.relative(galleryDirectory, fullPath);
+    // e.g. "Banners\my_image.png" -> folder="Banners", file="my_image.png"
+    // or just "my_image.png" -> no folder
+    const parts = relativePath.split(path.sep);
+    
+    let category = "Post"; // Default for root images
+    let filename = parts[parts.length - 1];
+
+    if (parts.length > 1) {
+      // Use the immediate parent folder name as the category
+      category = parts[parts.length - 2];
+    }
+
     const cleanTitle = filename.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+    
+    // Construct URL friendly path
+    const urlPath = parts.join('/');
+
     return {
       id: index + 1,
       title: cleanTitle,
-      category: "Design Portfolio",
-      imgUrl: encodeURI(`/images/Design Gallery/${filename}`),
+      category: category,
+      imgUrl: encodeURI(`/images/Design Gallery/${urlPath}`),
     };
   });
 

@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from "@vercel/analytics/next";
 import { Preloader } from "@/components/Preloader";
 import Spotlight from "@/components/ui/Spotlight";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -94,17 +95,19 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning className="bg-background text-foreground min-h-screen flex flex-col font-sans selection:bg-accent selection:text-white transition-colors duration-500">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <Preloader />
-            <Cursor />
-            <Spotlight />
-            {/* SVG Filters for the effect from the original theme */}
-            <svg width="0" height="0" style={{ position: "absolute", overflow: "hidden" }} aria-hidden="true">
-              <defs>
-                <filter id=""><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="2"/></filter>
-                <filter id="-2"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter>
-              </defs>
-            </svg>
-            {children}
+            <SmoothScrollProvider>
+              <Preloader />
+              <Cursor />
+              <Spotlight />
+              {/* SVG Filters for the effect from the original theme */}
+              <svg width="0" height="0" style={{ position: "absolute", overflow: "hidden" }} aria-hidden="true">
+                <defs>
+                  <filter id=""><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="2"/></filter>
+                  <filter id="-2"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter>
+                </defs>
+              </svg>
+              {children}
+            </SmoothScrollProvider>
             <Analytics />
             <script
               type="application/ld+json"

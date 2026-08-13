@@ -1,0 +1,77 @@
+[
+  {
+    "slug": "identity-design",
+    "title": "Identity Design",
+    "category": "Branding",
+    "outcome": "Increased brand recognition by 40% in Q1",
+    "image": "/images/project-section-banner/Identity Design.jpg",
+    "overview": "A comprehensive identity overhaul for a leading e-commerce brand. The goal was to strip away the noise and create a visual language that felt both premium and deeply trustworthy.",
+    "process": "We started by analyzing the competitive landscape, noting that most competitors relied on cluttered, over-stimulating visuals. We decided to go the opposite direction: brutalist minimalism. By restricting the color palette and focusing on strong typography, we created an identity that commands attention through its restraint.",
+    "tools": ["Illustrator", "Photoshop", "Figma"],
+    "gallery": [
+      "/images/Design Gallery/Branding/1.jpg",
+      "/images/Design Gallery/Branding/2.jpg",
+      "/images/Design Gallery/Branding/3.jpg"
+    ]
+  },
+  {
+    "slug": "motion-graphics",
+    "title": "Motion Graphics",
+    "category": "Animation",
+    "outcome": "Boosted social engagement by 300%",
+    "image": "/images/project-section-banner/Motion Graphics Desing.png",
+    "overview": "A series of high-impact motion graphics designed for a global product launch. The animations needed to explain complex features in under 15 seconds.",
+    "process": "We relied on bold, kinetic typography and seamless transitions. Instead of complex 3D renders, we used 2.5D parallax effects to keep the file sizes low and the playback buttery smooth across all devices. The result was a set of assets that dominated the social media feed.",
+    "tools": ["After Effects", "Premiere Pro"],
+    "gallery": [
+      "/images/Design Gallery/Social Media/1.jpg",
+      "/images/Design Gallery/Social Media/2.jpg",
+      "/images/Design Gallery/Social Media/3.jpg"
+    ]
+  },
+  {
+    "slug": "packaging-solution",
+    "title": "Packaging Solution",
+    "category": "Product",
+    "outcome": "Secured placement in 50+ retail stores",
+    "image": "/images/project-section-banner/Packeging Solution.png",
+    "overview": "Redesigning the unboxing experience for a luxury skincare line. The physical product needed to feel as premium as the digital experience.",
+    "process": "We selected matte-finish, sustainable materials and utilized blind debossing for the logo. The interior of the box features a stark, contrasting brand color that surprises the user upon opening. This tactile experience directly translated into higher retail buyer confidence.",
+    "tools": ["Illustrator", "Dimension"],
+    "gallery": [
+      "/images/Design Gallery/Packaging/1.jpg",
+      "/images/Design Gallery/Packaging/2.jpg",
+      "/images/Design Gallery/Packaging/3.jpg"
+    ]
+  },
+  {
+    "slug": "print-media",
+    "title": "Print Media",
+    "category": "Editorial",
+    "outcome": "Successfully reached 10,000+ local demographics",
+    "image": "/images/project-section-banner/Print Media.png",
+    "overview": "A stark, editorial magazine layout designed for an architecture firm's annual review.",
+    "process": "Embracing the grid, we created a layout that gave massive white space to the project photography while ensuring the typography was highly legible. The print used a heavy uncoated stock to give it a brutalist, tactile feel in the hands of investors.",
+    "tools": ["InDesign", "Photoshop"],
+    "gallery": [
+      "/images/Design Gallery/Display Banners/1.jpg",
+      "/images/Design Gallery/Display Banners/2.jpg",
+      "/images/Design Gallery/Display Banners/3.jpg"
+    ]
+  },
+  {
+    "slug": "social-media-creative",
+    "title": "Social Media Creative",
+    "category": "Marketing",
+    "outcome": "Drove 15% increase in direct conversions",
+    "image": "/images/project-section-banner/Social Media Creative.png",
+    "overview": "A unified social media visual system for a disruptive D2C beverage brand.",
+    "process": "We built a scalable template system using Figma that allowed the client's internal team to generate on-brand assets in minutes. The visual language relied on high-contrast, flash-photography style imagery paired with brutalist typography.",
+    "tools": ["Photoshop", "Figma"],
+    "gallery": [
+      "/images/Design Gallery/Social Media/4.jpg",
+      "/images/Design Gallery/Social Media/5.jpg",
+      "/images/Design Gallery/Social Media/6.jpg"
+    ]
+  }
+]

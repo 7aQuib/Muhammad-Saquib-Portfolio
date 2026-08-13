@@ -122,9 +122,9 @@ html {
   background: var(--color-foreground);
 }
 
-/* Ensure all interactive elements have pointer cursor */
-button, a {
-  cursor: pointer;
+/* Ensure all interactive elements hide native cursor for our custom cursor */
+* {
+  cursor: none !important;
 }
 
 /* GSAP Performance Layer */

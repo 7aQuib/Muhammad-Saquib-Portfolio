@@ -122,9 +122,14 @@ html {
   background: var(--color-foreground);
 }
 
-/* Ensure all interactive elements hide native cursor for our custom cursor */
+/* Apply crosshair cursor globally for a sleek, brutalist feel */
 * {
-  cursor: none !important;
+  cursor: crosshair;
+}
+
+/* Ensure interactive elements keep the crosshair (or use a pointer if preferred, but crosshair looks very cohesive) */
+button, a, [data-cursor] {
+  cursor: crosshair;
 }
 
 /* GSAP Performance Layer */

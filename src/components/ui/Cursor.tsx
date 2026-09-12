@@ -76,13 +76,14 @@ export default function Cursor() {
         y: cursorY,
         translateX: "-50%",
         translateY: "-50%",
-        mixBlendMode: "difference",
+        // Removed mixBlendMode so it doesn't fade or invert unexpectedly
       }}
       animate={{
         width: cursorSize,
         height: cursorSize,
-        backgroundColor: (isHovering && !cursorText) ? "transparent" : "#ffffff",
-        border: (isHovering && !cursorText) ? "2px solid #ffffff" : "0px solid #ffffff",
+        backgroundColor: "#ffffff",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+        border: "0px solid #ffffff",
       }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
     >

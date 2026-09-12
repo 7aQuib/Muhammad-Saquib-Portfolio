@@ -1,6 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
+import { EnquiryModal } from "@/components/EnquiryModal";
 
 export function Footer({ variant = "default" }: { variant?: "default" | "service" }) {
+  const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
+
   const baseClasses = "bg-background pt-20 pb-10 border-t-2 border-border";
   const isService = variant === "service";
 
@@ -58,7 +64,14 @@ export function Footer({ variant = "default" }: { variant?: "default" | "service
             <h3 className={`font-display text-2xl ${isService ? 'mb-svc-sm' : 'mb-6'}`}>Get in Touch</h3>
             <ul className={`font-hand text-xl ${isService ? 'space-y-svc-sm text-muted-foreground' : 'space-y-3 text-muted-foreground'}`}>
               <li><a href="mailto:mohammadsaquib693@gmail.com" className="hover:text-accent hover:underline decoration-2 transition-colors">mohammadsaquib693@gmail.com</a></li>
-              <li><Link href="/#contact" className="hover:text-accent hover:underline decoration-2 transition-colors">Book a Project</Link></li>
+              <li className="pt-2">
+                <button
+                  onClick={() => setIsEnquiryModalOpen(true)}
+                  className="bg-[#f24e1e] hover:bg-[#d94015] text-white px-6 py-2.5 rounded-full shadow-lg transition-all text-[11px] font-bold uppercase tracking-[0.15em] whitespace-nowrap inline-flex items-center group font-sans"
+                >
+                  Let's Talk
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -70,6 +83,11 @@ export function Footer({ variant = "default" }: { variant?: "default" | "service
           </p>
         </div>
       </div>
+      
+      <EnquiryModal 
+        isOpen={isEnquiryModalOpen} 
+        onClose={() => setIsEnquiryModalOpen(false)} 
+      />
     </footer>
   );
 }

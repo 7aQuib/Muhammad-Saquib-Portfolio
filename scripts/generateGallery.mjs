@@ -40,9 +40,21 @@ try {
     return results;
   }
 
-  const allImageFiles = walkDir(galleryDirectory);
+  const allImagePaths = walkDir(galleryDirectory);
 
-  const galleryItems = allImageFiles.map((fullPath, index) => {
+  const allImageFiles = allImagePaths.map(fullPath => {
+    const stat = fs.statSync(fullPath);
+    return {
+      fullPath,
+      mtimeMs: stat.mtimeMs
+    };
+  });
+
+  // Sort descending by modification time (newest first)
+  allImageFiles.sort((a, b) => b.mtimeMs - a.mtimeMs);
+
+  const galleryItems = allImageFiles.map((item, index) => {
+    const { fullPath } = item;
     const relativePath = path.relative(galleryDirectory, fullPath);
     // e.g. "Banners\my_image.png" -> folder="Banners", file="my_image.png"
     // or just "my_image.png" -> no folder

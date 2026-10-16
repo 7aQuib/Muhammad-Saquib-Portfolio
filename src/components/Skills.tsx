@@ -40,11 +40,11 @@ export function Skills() {
   };
 
   return (
-    <section id="skills" className="py-24 bg-background border-y border-border relative">
+    <section id="skills" className="py-14 md:py-20 bg-background border-y border-border relative">
       <Container>
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-12 gap-4">
           <div>
-            <div className="inline-block px-3 py-1 bg-card border-2 border-border shadow-hard rounded-full text-xs font-mono font-bold tracking-widest uppercase mb-6">
+            <div className="inline-block px-3 py-1 bg-card border-2 border-border shadow-hard rounded-full text-xs font-mono font-bold tracking-widest uppercase mb-3">
               04 — Tech Stack
             </div>
             <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tighter text-foreground">

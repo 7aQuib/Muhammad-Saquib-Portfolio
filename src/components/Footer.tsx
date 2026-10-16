@@ -7,7 +7,7 @@ import { EnquiryModal } from "@/components/EnquiryModal";
 export function Footer({ variant = "default" }: { variant?: "default" | "service" }) {
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
 
-  const baseClasses = "bg-background pt-20 pb-10 border-t-2 border-border";
+  const baseClasses = "bg-background pt-12 md:pt-16 pb-8 border-t-2 border-border";
   const isService = variant === "service";
 
   return (

@@ -22,8 +22,8 @@ export function About() {
   };
 
   return (
-    <section id="about" ref={containerRef} className="py-24 md:py-32 lg:py-48 bg-background overflow-hidden relative">
-      <Container className="space-y-32 md:space-y-48 lg:space-y-64">
+    <section id="about" ref={containerRef} className="py-14 md:py-20 bg-background overflow-hidden relative">
+      <Container className="space-y-16 md:space-y-24">
         
         {/* 1. About Hero / Creative Manifesto Section */}
         <motion.div 
@@ -39,7 +39,7 @@ export function About() {
           {/* Top Eyebrow Metadata Ribbon */}
           <motion.div 
             variants={fadeUp} 
-            className="flex items-center justify-between border-b border-border/80 pb-4 mb-8 sm:mb-12 max-w-5xl"
+            className="flex items-center justify-between border-b border-border/80 pb-3 mb-6 sm:mb-8 max-w-5xl"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-muted/60 rounded-full border border-border text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
@@ -69,10 +69,10 @@ export function About() {
           {/* Subtitle & Value Proposition Grid */}
           <motion.div 
             variants={fadeUp}
-            className="mt-8 sm:mt-12 pt-8 border-t border-border/80 max-w-5xl flex flex-col lg:flex-row lg:items-end justify-between gap-8"
+            className="mt-6 sm:mt-8 pt-6 border-t border-border/80 max-w-5xl flex flex-col lg:flex-row lg:items-end justify-between gap-6"
           >
             {/* Left: Interactive Discipline Pills & Manifesto Description */}
-            <div className="max-w-2xl space-y-4">
+            <div className="max-w-2xl space-y-3.5">
               <div className="flex flex-wrap items-center gap-2">
                 {[
                   { name: "Branding", tag: "Identity Systems" },
@@ -99,7 +99,7 @@ export function About() {
             </div>
 
             {/* Right: Authority Seal Card */}
-            <div className="flex-shrink-0 flex items-center gap-4 p-4 sm:p-5 rounded-2xl bg-card border border-border/80 shadow-xs">
+            <div className="flex-shrink-0 flex items-center gap-4 p-4 rounded-2xl bg-card border border-border/80 shadow-xs">
               <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent font-display text-xl font-bold">
                 ✦
               </div>
@@ -112,7 +112,7 @@ export function About() {
         </motion.div>
 
         {/* 2. Positioning (Portrait & Bio) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           {/* Left: Portrait */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}

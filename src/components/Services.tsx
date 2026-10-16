@@ -36,27 +36,27 @@ export function Services() {
   }, { scope: containerRef });
 
   return (
-    <section id="services" className="py-24 relative bg-background border-y border-border" ref={containerRef}>
+    <section id="services" className="py-14 md:py-20 relative bg-background border-y border-border" ref={containerRef}>
       <Container className="relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-12">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-card rounded-full border border-border text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-card rounded-full border border-border text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-3 shadow-sm">
               <span>03 / SERVICES & CAPABILITY</span>
             </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground tracking-tight mb-6 font-bold">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground tracking-tight mb-4 font-bold">
               Your vision.{" "}
               <span className="font-editorial italic font-normal text-foreground/90 block sm:inline">
                 My craft.
               </span>
             </h2>
-            <p className="text-lg md:text-xl font-light text-muted-foreground leading-relaxed">
+            <p className="text-base md:text-lg font-light text-muted-foreground leading-relaxed">
               From initial brand strategy to final shelf execution. Specialized design services focused on elevating your market perception and driving real business results.
             </p>
           </div>
         </div>
 
         {/* Sticky Card Stack */}
-        <div className="flex flex-col gap-12 md:gap-32 pb-12 md:pb-24">
+        <div className="flex flex-col gap-8 md:gap-14 pb-6 md:pb-10">
           {services.map((service, index) => {
             const Icon = service.icon;
             // Alternating layout for desktop

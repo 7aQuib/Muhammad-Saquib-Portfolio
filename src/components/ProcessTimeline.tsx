@@ -74,22 +74,22 @@ export function ProcessTimeline() {
   const scaleY = useTransform(smoothProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="process" ref={containerRef} className="py-24 md:py-36 bg-background relative overflow-hidden">
+    <section id="process" ref={containerRef} className="py-14 md:py-20 bg-background relative overflow-hidden">
       <Container>
         {/* Section Title */}
-        <div className="max-w-3xl mx-auto text-center mb-20 md:mb-28">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-card rounded-full border border-border text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4 shadow-sm">
+        <div className="max-w-3xl mx-auto text-center mb-10 md:mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-card rounded-full border border-border text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-3 shadow-sm">
             <span>02 / THE METHODOLOGY</span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-foreground leading-[1.1] mb-6">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-foreground leading-[1.1] mb-4">
             The Process{" "}
             <span className="font-editorial italic font-normal text-foreground/90 block sm:inline">
               that turns ideas into authority.
             </span>
           </h2>
 
-          <p className="text-lg md:text-xl text-muted-foreground font-sans font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground font-sans font-light leading-relaxed max-w-2xl mx-auto">
             A battle-tested, transparent roadmap designed to eliminate guesswork, respect your time, and deliver undeniable brand presence.
           </p>
         </div>
@@ -106,7 +106,7 @@ export function ProcessTimeline() {
           />
 
           {/* Milestones Stack */}
-          <div className="space-y-16 md:space-y-28">
+          <div className="space-y-10 md:space-y-14">
             {milestones.map((milestone, idx) => {
               const isEven = idx % 2 === 0;
 

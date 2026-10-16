@@ -11,7 +11,7 @@ export function HeroMarquee() {
   ];
 
   return (
-    <div className="w-full border-y border-border/80 bg-card/70 backdrop-blur-md py-4 md:py-5 overflow-hidden relative z-20 shadow-sm">
+    <div className="w-full border-y border-border/80 bg-card/70 backdrop-blur-md py-3 md:py-3.5 overflow-hidden relative z-20 shadow-xs">
       <div className="flex w-fit animate-marquee whitespace-nowrap">
         {[...Array(4)].map((_, i) => (
           <div

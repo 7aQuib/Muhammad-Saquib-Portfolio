@@ -104,12 +104,12 @@ export function CategoryProjects() {
 
   return (
     <>
-      <section id="projects" className="py-24 md:py-32 bg-background border-t border-border/80 relative">
+      <section id="projects" className="py-14 md:py-20 bg-background border-t border-border/80 relative">
         <Container>
           {/* Section Header matching reference image */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 md:mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-10">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-muted/60 rounded-full border border-border text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-muted/60 rounded-full border border-border text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-3">
                 <span>01 / SELECTED WORK</span>
               </div>
               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-foreground leading-[1.08]">
@@ -137,7 +137,7 @@ export function CategoryProjects() {
           </div>
 
           {/* Category Filter Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-6 md:mb-8 scrollbar-none">
             {categories.map((cat) => {
               const isActive = activeTab === cat;
               return (
@@ -159,7 +159,7 @@ export function CategoryProjects() {
           {/* 2-Column Responsive Card Grid matching reference image */}
           <motion.div 
             layout 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
           >
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project) => (

@@ -84,12 +84,12 @@ export function Testimonials() {
   };
 
   return (
-    <section id="testimonials" className="py-16 bg-background border-y-2 border-border overflow-hidden">
+    <section id="testimonials" className="py-12 md:py-16 bg-background border-y-2 border-border overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
           <div className="text-center md:text-left">
-            <div className="inline-block px-3 py-1 bg-card border-2 border-border shadow-hard rounded-full text-xs font-mono font-bold tracking-widest uppercase mb-6">
+            <div className="inline-block px-3 py-1 bg-card border-2 border-border shadow-hard rounded-full text-xs font-mono font-bold tracking-widest uppercase mb-3">
               02 — Client Love
             </div>
             <h2 className="text-4xl font-display text-foreground tracking-tight mb-2 md:mb-4">Don't just take my word for it.</h2>

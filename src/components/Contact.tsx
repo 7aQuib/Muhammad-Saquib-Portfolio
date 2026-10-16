@@ -27,17 +27,17 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 md:py-32 relative z-10">
+    <section id="contact" className="py-14 md:py-20 relative z-10">
       {/* Bold Orange Impression Banner matching reference image */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 md:mb-28">
-        <div className="bg-accent text-white rounded-[2.5rem] p-10 sm:p-14 md:p-20 relative overflow-hidden shadow-2xl">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 md:mb-14">
+        <div className="bg-accent text-white rounded-[2.5rem] p-8 sm:p-12 md:p-16 relative overflow-hidden shadow-2xl">
           {/* Top meta tags */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-[0.2em] text-white/80 pb-8 border-b border-white/20">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-[0.2em] text-white/80 pb-5 border-b border-white/20">
             <span>NEED SOMETHING BUILT? START HERE.</span>
             <span>VISMORA STUDIO / BRAND & PACKAGING DESIGN</span>
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mt-10 md:mt-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mt-6 md:mt-10">
             <div>
               <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight text-white leading-[1.02]">
                 Let's make <br />
@@ -53,15 +53,15 @@ export function Contact() {
                   const form = document.getElementById("enquiry-form-card");
                   form?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-2xl group cursor-pointer"
+                className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-2xl group cursor-pointer"
                 aria-label="Scroll to enquiry form"
               >
-                <ArrowUpRight className="w-10 h-10 md:w-14 md:h-14 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-black" />
+                <ArrowUpRight className="w-8 h-8 md:w-12 md:h-12 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-black" />
               </button>
             </div>
           </div>
 
-          <div className="mt-12 md:mt-16 pt-8 border-t border-white/20 flex flex-wrap items-center justify-between gap-6 text-xs md:text-sm font-mono uppercase tracking-widest text-white/90">
+          <div className="mt-8 md:mt-10 pt-6 border-t border-white/20 flex flex-wrap items-center justify-between gap-6 text-xs md:text-sm font-mono uppercase tracking-widest text-white/90">
             <a href="mailto:mohammadsaquib693@gmail.com" className="hover:text-white hover:underline flex items-center gap-2">
               <span>mohammadsaquib693@gmail.com</span>
               <span>↗</span>

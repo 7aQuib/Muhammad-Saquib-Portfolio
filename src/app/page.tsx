@@ -3,8 +3,8 @@ import dynamic from "next/dynamic";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 
+const HeroMarquee = dynamic(() => import("@/components/HeroMarquee").then((mod) => mod.HeroMarquee));
 const CategoryProjects = dynamic(() => import("@/components/CategoryProjects").then((mod) => mod.CategoryProjects));
-const ProjectProcessShowcase = dynamic(() => import("@/components/ProjectProcessShowcase").then((mod) => mod.ProjectProcessShowcase));
 const About = dynamic(() => import("@/components/About").then((mod) => mod.About));
 const ProcessTimeline = dynamic(() => import("@/components/ProcessTimeline").then((mod) => mod.ProcessTimeline));
 const Services = dynamic(() => import("@/components/Services").then((mod) => mod.Services));
@@ -31,10 +31,10 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        {/* Section before "I build visual identities..." featuring Branding, Packaging, Social Media Creatives, Ads Campaigns */}
+        {/* Animated marquee text ticker directly below the Hero section */}
+        <HeroMarquee />
+        {/* Section before "I build visual identities..." with click-to-open Case Study modal */}
         <CategoryProjects />
-        {/* In-depth working process case study showcase */}
-        <ProjectProcessShowcase />
         {/* Starts with "I build visual identities that command authority." */}
         <About />
         {/* Scroll-animated timeline for The Process */}

@@ -199,28 +199,6 @@ export function Hero() {
 
         </div>
       </Container>
-
-      {/* Ticker marquee matching reference image */}
-      <div className="w-full border-t border-border bg-card/60 backdrop-blur-md py-4 overflow-hidden relative z-20">
-        <div className="flex w-fit animate-marquee whitespace-nowrap">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="flex items-center gap-6 px-4 text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-muted-foreground">
-              <span>Brand Identity</span>
-              <span className="text-accent font-bold">✦</span>
-              <span>Packaging Design</span>
-              <span className="text-accent font-bold">✦</span>
-              <span>Social Media Creatives</span>
-              <span className="text-accent font-bold">✦</span>
-              <span>Ads Campaign Creatives</span>
-              <span className="text-accent font-bold">✦</span>
-              <span>Creative Direction</span>
-              <span className="text-accent font-bold">✦</span>
-              <span>Visual Storytelling</span>
-              <span className="text-accent font-bold">✦</span>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }

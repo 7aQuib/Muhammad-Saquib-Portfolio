@@ -142,10 +142,10 @@ export function Hero() {
               >
                 <span>Drop a hello:</span>
                 <a 
-                  href="mailto:ansarisaquib3@gmail.com" 
+                  href="mailto:mohammadsaquib693@gmail.com" 
                   className="text-foreground hover:text-accent transition-colors font-medium lowercase tracking-normal"
                 >
-                  ansarisaquib3@gmail.com
+                  mohammadsaquib693@gmail.com
                 </a>
               </motion.div>
             </motion.div>

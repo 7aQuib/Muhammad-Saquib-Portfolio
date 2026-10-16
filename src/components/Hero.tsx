@@ -96,6 +96,11 @@ export function Hero() {
           {/* Tiny dim so it isn't blindingly white */}
           <div className="absolute inset-0 bg-background/10" />
 
+          {/* Corner sticker badge matching reference image */}
+          <div className="hidden sm:block absolute bottom-16 right-8 md:right-16 z-20 bg-accent text-white px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-wider rounded-xl shadow-2xl -rotate-6 border border-white/20">
+            HANDCRAFTED STORIES ✦
+          </div>
+
           {/* Fade left edge into the text area */}
           <div className="absolute top-0 bottom-0 left-0 w-3/4 bg-gradient-to-r from-background via-background/40 to-transparent" />
 
@@ -114,49 +119,61 @@ export function Hero() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end min-h-[80vh] pb-12 md:pb-20 lg:pb-32">
 
           {/* Left Column - Typography */}
-          <div className="md:col-span-7 flex flex-col justify-end">
+          <div className="md:col-span-7 flex flex-col justify-end pt-12 md:pt-0">
             <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
-              <motion.div variants={itemVariants} className="text-muted-foreground font-hand text-3xl md:text-5xl italic mb-2 md:-mb-4 ml-2">
-                I'm
+              {/* Top metadata pill from reference */}
+              <motion.div variants={itemVariants} className="flex items-center justify-between text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-6 max-w-lg border-b border-border/80 pb-3">
+                <span>INDEPENDENT DESIGN DIRECTOR</span>
+                <span className="text-accent font-bold">AVAILABLE Q1 2026</span>
               </motion.div>
 
-              <h1 className="text-[12vw] md:text-[6rem] lg:text-[8rem] font-display font-bold text-foreground tracking-tighter leading-[0.85] uppercase relative">
+              {/* Editorial script kicker from reference */}
+              <motion.p variants={itemVariants} className="font-editorial text-2xl md:text-3xl text-muted-foreground italic mb-2 tracking-normal lowercase">
+                a little structure, a lot of soul.
+              </motion.p>
+
+              {/* Main Headline */}
+              <h1 className="text-[12vw] sm:text-[5rem] md:text-[6rem] lg:text-[7.5rem] font-display font-bold text-foreground tracking-tight leading-[0.88] uppercase relative">
                 <div>{renderWordReveal("Muhammad")}</div>
-                <div className="flex items-end gap-8">
-                  <div>{renderWordReveal("Saquib")}</div>
-                  <motion.div variants={itemVariants} className="hidden lg:block pb-2">
-                    <div className="text-muted-foreground normal-case tracking-normal leading-normal text-left">
-                      <p className="font-display italic text-xl text-muted-foreground">Design Portfolio 2026</p>
-                      <p className="font-sans text-xs tracking-[0.2em] mt-1 max-w-[400px] leading-relaxed">
-                        Brand & Packaging Designer | Visual Storytelling For Modern Brands
-                      </p>
-                    </div>
-                  </motion.div>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-editorial italic font-normal text-foreground normal-case tracking-normal">
+                    Saquib
+                  </span>
+                  <span className="text-accent">.</span>
                 </div>
               </h1>
 
-              <motion.div variants={itemVariants} className="mt-24 md:mt-32 flex flex-col md:flex-row md:items-center justify-start gap-8 text-muted-foreground group cursor-pointer">
+              {/* Subtitle */}
+              <motion.p 
+                variants={itemVariants}
+                className="mt-6 md:mt-8 text-base sm:text-lg md:text-xl text-muted-foreground font-sans font-light max-w-xl leading-relaxed"
+              >
+                Senior Brand & Packaging Designer. Turning ambitious ideas into distinctive, market-leading visual identities.
+              </motion.p>
+
+              {/* CTAs */}
+              <motion.div variants={itemVariants} className="mt-8 md:mt-12 flex flex-wrap items-center gap-6">
                 <MagneticButton>
-                  <a href="#portfolio" className="bg-foreground text-background px-8 py-4 rounded-xl font-bold uppercase tracking-wider border-2 border-transparent hover:border-border shadow-hard hover:-translate-y-1 transition-all whitespace-nowrap inline-block text-center">
-                    View Selected Works
+                  <a 
+                    href="#projects" 
+                    className="bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-xl font-bold uppercase tracking-wider shadow-lg hover:-translate-y-0.5 transition-all whitespace-nowrap inline-flex items-center gap-3 text-sm"
+                  >
+                    <span>Explore My Work</span>
+                    <span>→</span>
                   </a>
                 </MagneticButton>
                 
-                <div className="flex items-center gap-4">
-                  <motion.div
-                    animate={{ y: [0, 5, 0] }}
-                    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                  >
-                    <ArrowDownRight className="w-8 h-8 flex-shrink-0 group-hover:text-accent transition-colors" />
-                  </motion.div>
-                  <p className="font-sans text-xs uppercase tracking-[0.2em] leading-relaxed group-hover:text-foreground transition-colors">
-                    Crafting High-Impact Visual Identities
-                  </p>
-                </div>
+                <a 
+                  href="#contact"
+                  className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                >
+                  <span className="w-2 h-2 rounded-full bg-accent" />
+                  <span>Let's collaborate</span>
+                </a>
               </motion.div>
             </motion.div>
           </div>
@@ -182,6 +199,28 @@ export function Hero() {
 
         </div>
       </Container>
+
+      {/* Ticker marquee matching reference image */}
+      <div className="w-full border-t border-border bg-card/60 backdrop-blur-md py-4 overflow-hidden relative z-20">
+        <div className="flex w-fit animate-marquee whitespace-nowrap">
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="flex items-center gap-6 px-4 text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-muted-foreground">
+              <span>Brand Identity</span>
+              <span className="text-accent font-bold">✦</span>
+              <span>Packaging Design</span>
+              <span className="text-accent font-bold">✦</span>
+              <span>Social Media Creatives</span>
+              <span className="text-accent font-bold">✦</span>
+              <span>Ads Campaign Creatives</span>
+              <span className="text-accent font-bold">✦</span>
+              <span>Creative Direction</span>
+              <span className="text-accent font-bold">✦</span>
+              <span>Visual Storytelling</span>
+              <span className="text-accent font-bold">✦</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

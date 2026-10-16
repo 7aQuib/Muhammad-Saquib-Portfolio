@@ -5,32 +5,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import profileImage from "../Assets/Images/Profile.png";
 import Container from "@/components/ui/Container";
-import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
-
 export function About() {
   const containerRef = useRef<HTMLElement>(null);
-
-  useGSAP(() => {
-    const cards = gsap.utils.toArray<HTMLDivElement>('.process-card');
-    
-    cards.forEach((card, index) => {
-      // Don't animate the last card
-      if (index === cards.length - 1) return;
-      
-      const nextCard = cards[index + 1];
-      
-      gsap.to(card, {
-        scale: 0.95,
-        filter: "brightness(0.3)",
-        scrollTrigger: {
-          trigger: nextCard,
-          start: "top center", 
-          end: `top top+=${96 + ((index + 1) * 32)}`, // roughly matching the stick offset
-          scrub: true,
-        }
-      });
-    });
-  }, { scope: containerRef });
 
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -85,96 +61,67 @@ export function About() {
             viewport={{ once: true, margin: "-100px" }}
             className="col-span-1 lg:col-span-5 relative"
           >
-            <div className="relative w-full aspect-[3/4] overflow-hidden bg-card border border-border group cursor-none" data-cursor="hover" data-cursor-label="MEET ME">
+            <div className="relative w-full aspect-[3/4] overflow-hidden rounded-3xl bg-card border border-border group shadow-lg" data-cursor="hover" data-cursor-label="MEET ME">
               <Image
                 src={profileImage}
-                alt="Mohammad Saquib"
+                alt="Mohammad Saquib - Senior Brand & Packaging Designer"
                 fill
                 className="object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-700"
               />
-              {/* Subtle accent overlay */}
-              <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-700 pointer-events-none" />
+              {/* Corner badge matching reference */}
+              <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-accent text-white text-[10px] font-mono uppercase tracking-widest font-bold rounded-full shadow-md">
+                DESIGN DIRECTOR
+              </div>
+            </div>
+            <div className="mt-4 flex items-center justify-between text-xs font-mono text-muted-foreground uppercase tracking-widest px-2">
+              <span>Mohammad Saquib</span>
+              <span>Based in India</span>
             </div>
           </motion.div>
 
-          {/* Right: Bio */}
+          {/* Right: Bio & Philosophy matching reference */}
           <motion.div 
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="col-span-1 lg:col-span-7 flex flex-col gap-8 md:gap-10"
+            className="col-span-1 lg:col-span-7 flex flex-col gap-6 md:gap-8"
           >
-            <motion.p variants={fadeUp} className="text-2xl md:text-4xl text-foreground font-sans font-light leading-[1.3] tracking-tight">
-              My journey started with a simple realization: <span className="italic text-muted-foreground">design isn't just about making things look pretty, it's about solving commercial problems</span>.
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-muted/60 rounded-full border border-border text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground w-fit">
+              <span>02 / THE PERSON BEHIND IT</span>
+            </div>
+
+            <motion.h3 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-foreground tracking-tight leading-[1.15]">
+              Good design starts{" "}
+              <span className="font-editorial italic font-normal text-foreground/90 block sm:inline">
+                with a better question.
+              </span>
+            </motion.h3>
+
+            <motion.p variants={fadeUp} className="text-xl md:text-2xl text-foreground font-sans font-light leading-[1.3] tracking-tight">
+              What does a brand feel like first? Before typography, color palettes, or packaging forms, there is an instinctual gut reaction: a feeling that something is either <span className="italic text-muted-foreground">premium, punchy, or quietly confident</span>.
             </motion.p>
-            <motion.p variants={fadeUp} className="text-lg md:text-xl text-muted-foreground font-sans font-light leading-relaxed">
-              I grew up fascinated by how specific colors and shapes could make a brand feel instantly trustworthy or entirely forgettable. That curiosity led me to specialize in strategic brand identity and packaging.
+
+            <motion.p variants={fadeUp} className="text-base md:text-lg text-muted-foreground font-sans font-light leading-relaxed">
+              From youth-focused FMCG and retail goods to bold corporate identities, my goal is fundamental: to make a product look undeniably memorable in the three seconds a customer gives it.
             </motion.p>
-            <motion.p variants={fadeUp} className="text-lg md:text-xl text-muted-foreground font-sans font-light leading-relaxed">
-              Today, I partner with ambitious founders to strip away the noise. I believe in a rigorous adherence to minimalism—designing scalable visual systems that command authority and drive measurable business results.
-            </motion.p>
+
+            {/* Core Tools Badges matching reference image */}
+            <motion.div variants={fadeUp} className="pt-4 border-t border-border flex flex-wrap items-center gap-3">
+              <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider mr-2">Core Tools:</span>
+              {["Illustrator", "Photoshop", "Figma", "After Effects", "Packaging Prepress"].map((tool) => (
+                <span
+                  key={tool}
+                  className="px-3.5 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider bg-card border border-border text-foreground/80 shadow-xs"
+                >
+                  {tool}
+                </span>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
 
-
-
-        {/* 4. Process */}
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24"
-        >
-          <div className="col-span-1 lg:col-span-4 relative">
-            <motion.h3 variants={fadeUp} className="text-xs md:text-sm font-sans tracking-[0.2em] text-muted-foreground uppercase lg:sticky lg:top-32 border-b border-border pb-6 lg:border-none lg:pb-0">
-              The Process
-            </motion.h3>
-          </div>
-          
-          <div className="col-span-1 lg:col-span-8 flex flex-col gap-24 md:gap-32">
-            {[
-              {
-                title: "Discovery",
-                desc: "Before any design begins, we dissect the business. We analyze market positioning, audience psychology, and commercial objectives to ensure the design solves real problems."
-              },
-              {
-                title: "Strategy",
-                desc: "We define the visual architecture. This is where typography, color theory, and layout systems are chosen not for trends, but for their psychological impact and scalability."
-              },
-              {
-                title: "Execution",
-                desc: "The final phase is rigorous refinement. Stripping away the unnecessary until only the undeniable remains, delivering a polished, high-end visual identity ready for market."
-              }
-            ].map((step, i) => (
-              <ProcessCard key={i} step={step} index={i} />
-            ))}
-          </div>
-        </motion.div>
-
-
-
       </Container>
     </section>
-  );
-}
-
-function ProcessCard({ step, index }: { step: { title: string, desc: string }, index: number }) {
-  return (
-    <div 
-      className="process-card sticky origin-top flex flex-col gap-6 group/step cursor-none p-8 rounded-2xl hover:bg-card hover:border hover:border-border transition-colors duration-500 bg-background border border-transparent shadow-[0_20px_50px_rgba(0,0,0,0.1)] w-full max-w-3xl z-10" 
-      style={{ top: `calc(6rem + ${index * 2}rem)` }}
-      data-cursor="hover" 
-      data-cursor-label="PROCESS"
-    >
-      <div className="absolute -left-4 md:-left-12 -top-12 md:-top-20 text-[8rem] md:text-[14rem] font-display font-bold text-foreground/[0.03] group-hover/step:text-foreground/[0.08] transition-colors duration-500 select-none pointer-events-none leading-none tracking-tighter">
-        0{index + 1}
-      </div>
-      <h4 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-foreground tracking-tight relative z-10">{step.title}</h4>
-      <p className="text-lg md:text-xl text-muted-foreground font-sans font-light leading-relaxed max-w-2xl relative z-10">
-        {step.desc}
-      </p>
-    </div>
   );
 }

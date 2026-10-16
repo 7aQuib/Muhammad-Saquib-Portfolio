@@ -40,11 +40,17 @@ export function Services() {
       <Container className="relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="max-w-3xl">
-            <h2 className="text-5xl md:text-7xl font-display text-foreground tracking-tight mb-6 font-bold">
-              Crafted to <span className="text-accent">convert.</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-card rounded-full border border-border text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4 shadow-sm">
+              <span>03 / SERVICES & CAPABILITY</span>
+            </div>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display text-foreground tracking-tight mb-6 font-bold">
+              Your vision.{" "}
+              <span className="font-editorial italic font-normal text-foreground/90 block sm:inline">
+                My craft.
+              </span>
             </h2>
             <p className="text-lg md:text-xl font-light text-muted-foreground leading-relaxed">
-              Specialized design services focused on elevating your brand's perception and driving real business results. Professional, user-friendly, and tailored to your goals.
+              From initial brand strategy to final shelf execution. Specialized design services focused on elevating your market perception and driving real business results.
             </p>
           </div>
         </div>
@@ -97,6 +103,28 @@ export function Services() {
               </Link>
             );
           })}
+        </div>
+
+        {/* 3 Impact Metric Cards matching reference image */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+          <div className="p-8 rounded-3xl bg-card border border-border/80 shadow-sm">
+            <span className="text-3xl md:text-4xl font-display font-bold text-accent mb-2 block">10+ Brands</span>
+            <p className="text-sm font-sans text-muted-foreground leading-relaxed">
+              Helped scale or launch ambitious brands across consumer goods, retail, and tech.
+            </p>
+          </div>
+          <div className="p-8 rounded-3xl bg-card border border-border/80 shadow-sm">
+            <span className="text-3xl md:text-4xl font-display font-bold text-accent mb-2 block">50+ SKUs & Packs</span>
+            <p className="text-sm font-sans text-muted-foreground leading-relaxed">
+              Executed for physical packaging production, retail coolers, and real-world shelves.
+            </p>
+          </div>
+          <div className="p-8 rounded-3xl bg-card border border-border/80 shadow-sm">
+            <span className="text-3xl md:text-4xl font-display font-bold text-accent mb-2 block">98% Delivery</span>
+            <p className="text-sm font-sans text-muted-foreground leading-relaxed">
+              Delivered on milestone deadlines with clear, transparent communication and support.
+            </p>
+          </div>
         </div>
 
         {/* Lead Magnet Box */}

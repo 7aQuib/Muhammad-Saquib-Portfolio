@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
+function ArrowLeftIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+    </svg>
+  );
+}
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import ProcessRoadmap from "@/components/ProcessRoadmap";
@@ -272,7 +278,7 @@ export default async function ServicePage({
               {/* Title Block */}
               <div className="col-span-12 md:col-span-7">
                 <Link href="/#services" className="inline-flex items-center text-foreground font-bold hover:text-accent transition-colors mb-svc-md font-mono text-sm uppercase tracking-wider">
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to Services
+                  <ArrowLeftIcon className="mr-2 h-4 w-4" /> Back to Services
                 </Link>
                 <h1 className="text-5xl md:text-7xl font-display max-w-[12ch]">
                   {service.title}

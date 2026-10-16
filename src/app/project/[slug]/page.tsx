@@ -1,10 +1,17 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import caseStudies from "@/data/caseStudies.json";
 import Container from "@/components/ui/Container";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+
+function ArrowLeftIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+    </svg>
+  );
+}
 
 export function generateStaticParams() {
   return caseStudies.map((study) => ({
@@ -12,8 +19,9 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const study = caseStudies.find((s) => s.slug === params.slug);
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const study = caseStudies.find((s) => s.slug === slug);
 
   if (!study) {
     notFound();
@@ -24,10 +32,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       <Container>
         {/* Back button */}
         <Link 
-          href="/#portfolio" 
+          href="/#projects" 
           className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors font-mono uppercase text-sm tracking-widest mb-12"
         >
-          <ArrowLeft className="w-4 h-4 mr-2" />
+          <ArrowLeftIcon className="w-4 h-4 mr-2" />
           Back to Projects
         </Link>
 

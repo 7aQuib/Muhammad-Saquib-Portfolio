@@ -13,11 +13,11 @@ export function Navbar() {
 
   const links = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About Me" },
-    { href: "/#portfolio", label: "Portfolio" },
-    { href: "/gallery", label: "Gallery" },
-    { href: "#services", label: "Services" },
-    { href: "#testimonials", label: "Testimonials" },
+    { href: "/#projects", label: "Work" },
+    { href: "/#showcase", label: "Case Study" },
+    { href: "/#process", label: "Process" },
+    { href: "/#services", label: "Services" },
+    { href: "/about", label: "About" },
   ];
 
   return (
@@ -26,9 +26,9 @@ export function Navbar() {
         
         {/* Left Side: Brand & Separator */}
         <div className="flex items-center gap-4 lg:gap-6">
-          <Link href="/" className="font-display text-2xl tracking-tight flex items-center group">
-            <span className="text-accent mr-1 opacity-70 group-hover:opacity-100 transition-opacity">★</span> 
-            Vismora<span className="text-brand-gradient ml-1 font-hand-alt text-2xl opacity-80 group-hover:opacity-100">.studio</span>
+          <Link href="/" className="font-display font-bold text-xl md:text-2xl tracking-tight flex items-center group">
+            <span className="text-accent mr-1.5 opacity-90 group-hover:scale-110 transition-transform">✦</span> 
+            <span className="text-foreground">vismora</span><span className="text-accent">.studio</span>
           </Link>
           <div className="hidden lg:block w-px h-5 bg-border/80"></div>
         </div>

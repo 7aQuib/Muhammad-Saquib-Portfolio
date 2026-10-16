@@ -13,10 +13,11 @@
   --color-card-foreground: var(--card-foreground);
   --color-sidebar: var(--sidebar);
   
-  --font-sans: var(--font-playfair);
+  --font-sans: var(--font-outfit);
+  --font-serif: var(--font-serif);
   --font-display: var(--font-outfit);
   --font-mono: var(--font-mono);
-  --font-hand: var(--font-playfair);
+  --font-hand: var(--font-serif);
   --font-hand-alt: var(--font-outfit);
 
   /* Scoped Spacing Tokens (Phase 7) */
@@ -30,31 +31,31 @@
 
 @layer base {
   :root {
-    --background: #FAFAFA;
-    --foreground: #1C1C1C;
-    --muted: #EAEAEA;
-    --muted-foreground: #737373;
-    --accent: #1C1C1C;
-    --accent-purple: #1C1C1C;
-    --accent-foreground: #FAFAFA;
-    --border: rgba(28, 28, 28, 0.1);
+    --background: #F5F5F0;
+    --foreground: #141414;
+    --muted: #EAEAE5;
+    --muted-foreground: #72726E;
+    --accent: #FF4D24;
+    --accent-purple: #FF4D24;
+    --accent-foreground: #FFFFFF;
+    --border: rgba(20, 20, 20, 0.08);
     --card: #FFFFFF;
-    --card-foreground: #1C1C1C;
+    --card-foreground: #141414;
     --sidebar: #FFFFFF;
   }
 
   .dark {
-    --background: #1C1C1C;
-    --foreground: #FAFAFA;
-    --muted: #2A2A2A;
-    --muted-foreground: #A3A3A3;
-    --accent: #FAFAFA;
-    --accent-purple: #FAFAFA;
-    --accent-foreground: #1C1C1C;
-    --border: rgba(250, 250, 250, 0.1);
-    --card: #222222;
-    --card-foreground: #FAFAFA;
-    --sidebar: #1C1C1C;
+    --background: #111110;
+    --foreground: #F5F5F0;
+    --muted: #1E1E1C;
+    --muted-foreground: #9E9E98;
+    --accent: #FF4D24;
+    --accent-purple: #FF4D24;
+    --accent-foreground: #FFFFFF;
+    --border: rgba(245, 245, 240, 0.1);
+    --card: #181816;
+    --card-foreground: #F5F5F0;
+    --sidebar: #111110;
   }
 }
 
@@ -87,6 +88,15 @@
 
 @utility text-brand-gradient {
   color: var(--color-accent);
+}
+
+@utility font-serif {
+  font-family: var(--font-serif);
+}
+
+@utility font-editorial {
+  font-family: var(--font-serif);
+  font-style: italic;
 }
 
 body {
@@ -190,4 +200,23 @@ button, a, [data-cursor] {
 
 .footer--service .footer-col {
   @apply col-span-1 md:col-span-2;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

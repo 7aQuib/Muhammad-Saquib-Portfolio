@@ -1,3 +1,5 @@
+"use client";
+
 import { logout } from "@/app/actions/auth";
 import { LogOut, Settings, Users, Activity, Briefcase } from "lucide-react";
 import Link from "next/link";

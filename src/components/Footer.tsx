@@ -15,8 +15,9 @@ export function Footer({ variant = "default" }: { variant?: "default" | "service
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`grid ${isService ? 'footer-grid' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12'}`}>
           <div className={isService ? 'footer-logo' : 'col-span-1 md:col-span-1'}>
-            <Link href="/" className="font-display text-3xl tracking-tight flex items-center">
-              ★ Vismora<span className="text-brand-gradient ml-1 font-hand-alt text-4xl">.studio</span>
+            <Link href="/" className="font-display font-bold text-2xl md:text-3xl tracking-tight flex items-center">
+              <span className="text-accent mr-1.5 opacity-90">✦</span>
+              <span className="text-foreground">vismora</span><span className="text-accent">.studio</span>
             </Link>
             <p className="mt-6 font-hand text-xl text-muted-foreground">
               Premium branding, packaging, social media, and visual design for bold brands.
@@ -52,22 +53,24 @@ export function Footer({ variant = "default" }: { variant?: "default" | "service
           
           <div className={`${isService ? 'footer-col mt-6' : ''}`}>
             <h3 className={`font-display text-2xl ${isService ? 'mb-svc-sm' : 'mb-6'}`}>Quick Links</h3>
-            <ul className={`font-hand text-xl ${isService ? 'space-y-svc-sm text-muted-foreground' : 'space-y-3 text-muted-foreground'}`}>
+            <ul className={`font-sans text-base ${isService ? 'space-y-svc-sm text-muted-foreground' : 'space-y-3 text-muted-foreground'}`}>
               <li><Link href="/" className="hover:text-accent hover:underline decoration-2 transition-colors">Home</Link></li>
+              <li><Link href="/#projects" className="hover:text-accent hover:underline decoration-2 transition-colors">Selected Work</Link></li>
+              <li><Link href="/#showcase" className="hover:text-accent hover:underline decoration-2 transition-colors">Juice Pop Showcase</Link></li>
+              <li><Link href="/#process" className="hover:text-accent hover:underline decoration-2 transition-colors">The Process</Link></li>
               <li><Link href="/about" className="hover:text-accent hover:underline decoration-2 transition-colors">About Me</Link></li>
-              <li><Link href="/#portfolio" className="hover:text-accent hover:underline decoration-2 transition-colors">Portfolio</Link></li>
               <li><Link href="/#testimonials" className="hover:text-accent hover:underline decoration-2 transition-colors">Testimonials</Link></li>
             </ul>
           </div>
           
           <div className={isService ? 'footer-col' : ''}>
             <h3 className={`font-display text-2xl ${isService ? 'mb-svc-sm' : 'mb-6'}`}>Get in Touch</h3>
-            <ul className={`font-hand text-xl ${isService ? 'space-y-svc-sm text-muted-foreground' : 'space-y-3 text-muted-foreground'}`}>
+            <ul className={`font-sans text-base ${isService ? 'space-y-svc-sm text-muted-foreground' : 'space-y-3 text-muted-foreground'}`}>
               <li><a href="mailto:mohammadsaquib693@gmail.com" className="hover:text-accent hover:underline decoration-2 transition-colors">mohammadsaquib693@gmail.com</a></li>
               <li className="pt-2">
                 <button
                   onClick={() => setIsEnquiryModalOpen(true)}
-                  className="bg-[#f24e1e] hover:bg-[#d94015] text-white px-6 py-2.5 rounded-full shadow-lg transition-all text-[11px] font-bold uppercase tracking-[0.15em] whitespace-nowrap inline-flex items-center group font-sans"
+                  className="bg-accent hover:bg-accent/90 text-white px-6 py-2.5 rounded-full shadow-lg transition-all text-[11px] font-bold uppercase tracking-[0.15em] whitespace-nowrap inline-flex items-center group font-sans"
                 >
                   Let's Talk
                 </button>

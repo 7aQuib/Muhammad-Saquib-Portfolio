@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, ArrowUpRight } from "lucide-react";
 import { sendEnquiry } from "@/app/actions/contact";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 
@@ -27,9 +27,55 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-32 relative z-10">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-card/60 backdrop-blur-xl rounded-3xl p-8 md:p-12 border-2 border-border shadow-hard relative overflow-hidden">
+    <section id="contact" className="py-24 md:py-32 relative z-10">
+      {/* Bold Orange Impression Banner matching reference image */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 md:mb-28">
+        <div className="bg-accent text-white rounded-[2.5rem] p-10 sm:p-14 md:p-20 relative overflow-hidden shadow-2xl">
+          {/* Top meta tags */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs font-mono uppercase tracking-[0.2em] text-white/80 pb-8 border-b border-white/20">
+            <span>NEED SOMETHING BUILT? START HERE.</span>
+            <span>VISMORA STUDIO / BRAND & PACKAGING DESIGN</span>
+          </div>
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mt-10 md:mt-16">
+            <div>
+              <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight text-white leading-[1.02]">
+                Let's make <br />
+                <span className="font-editorial italic font-normal text-white">
+                  an impression.
+                </span>
+              </h2>
+            </div>
+
+            <div className="flex-shrink-0">
+              <button
+                onClick={() => {
+                  const form = document.getElementById("enquiry-form-card");
+                  form?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-2xl group cursor-pointer"
+                aria-label="Scroll to enquiry form"
+              >
+                <ArrowUpRight className="w-10 h-10 md:w-14 md:h-14 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-black" />
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-12 md:mt-16 pt-8 border-t border-white/20 flex flex-wrap items-center justify-between gap-6 text-xs md:text-sm font-mono uppercase tracking-widest text-white/90">
+            <a href="mailto:mohammadsaquib693@gmail.com" className="hover:text-white hover:underline flex items-center gap-2">
+              <span>mohammadsaquib693@gmail.com</span>
+              <span>↗</span>
+            </a>
+            <a href="https://wa.me/917620884427" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline flex items-center gap-2">
+              <span>Direct WhatsApp Inquiry</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="enquiry-form-card" className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-card/90 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-border/80 shadow-xl relative overflow-hidden">
           {/* Decorative shapes */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-accent opacity-20 rounded-bl-full pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-40 h-40 bg-accent-purple opacity-20 rounded-tr-full pointer-events-none" />

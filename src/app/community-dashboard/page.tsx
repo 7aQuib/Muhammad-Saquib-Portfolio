@@ -1,3 +1,5 @@
+"use client";
+
 import { logout } from "@/app/actions/auth";
 import { LogOut, Users, Video, FileText, Download } from "lucide-react";
 

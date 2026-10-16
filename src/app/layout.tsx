@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Outfit, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Cursor from "@/components/ui/Cursor";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -8,9 +8,10 @@ import { Preloader } from "@/components/Preloader";
 import Spotlight from "@/components/ui/Spotlight";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-serif",
   subsets: ["latin"],
+  weight: "400",
   style: ["normal", "italic"],
 });
 
@@ -91,7 +92,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${playfair.variable} ${outfit.variable} ${jetbrainsMono.variable} antialiased`}
+      className={`${instrumentSerif.variable} ${outfit.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <body suppressHydrationWarning className="bg-background text-foreground min-h-screen flex flex-col font-sans selection:bg-accent selection:text-white transition-colors duration-500">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

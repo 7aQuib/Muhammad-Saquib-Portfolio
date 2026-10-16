@@ -25,30 +25,90 @@ export function About() {
     <section id="about" ref={containerRef} className="py-24 md:py-32 lg:py-48 bg-background overflow-hidden relative">
       <Container className="space-y-32 md:space-y-48 lg:space-y-64">
         
-        {/* 1. About Hero Section */}
+        {/* 1. About Hero / Creative Manifesto Section */}
         <motion.div 
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="grid grid-cols-12 gap-6"
+          className="relative"
         >
-          <div className="col-span-12 lg:col-span-10">
+          {/* Subtle ambient warm back-glow */}
+          <div className="absolute -top-12 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none -z-10" />
+
+          {/* Top Eyebrow Metadata Ribbon */}
+          <motion.div 
+            variants={fadeUp} 
+            className="flex items-center justify-between border-b border-border/80 pb-4 mb-8 sm:mb-12 max-w-5xl"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-muted/60 rounded-full border border-border text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span>02 / CREATIVE MANIFESTO</span>
+            </div>
+            <span className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground hidden sm:inline">
+              STRATEGY × CRAFT × COMMERCE
+            </span>
+          </motion.div>
+
+          {/* Main Headline */}
+          <div className="max-w-5xl">
             <motion.h2 
               variants={fadeUp}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-[6rem] font-display font-bold tracking-tighter leading-[1.1] text-foreground uppercase"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.2rem] font-display font-extrabold tracking-tight text-foreground leading-[1.04]"
             >
-              I build visual identities that command authority.
+              <span>I build visual identities</span>{" "}
+              <span className="block sm:mt-1">
+                <span className="font-editorial italic font-normal text-accent normal-case tracking-normal">
+                  that command authority
+                </span>
+                <span className="text-accent inline-block ml-1">.</span>
+              </span>
             </motion.h2>
           </div>
-          <div className="col-span-12 lg:col-span-7 mt-6 md:mt-8">
-            <motion.p 
-              variants={fadeUp}
-              className="text-xl md:text-3xl text-muted-foreground font-sans font-light leading-relaxed"
-            >
-              Branding, packaging, and visual systems for ambitious founders who demand market leadership.
-            </motion.p>
-          </div>
+
+          {/* Subtitle & Value Proposition Grid */}
+          <motion.div 
+            variants={fadeUp}
+            className="mt-8 sm:mt-12 pt-8 border-t border-border/80 max-w-5xl flex flex-col lg:flex-row lg:items-end justify-between gap-8"
+          >
+            {/* Left: Interactive Discipline Pills & Manifesto Description */}
+            <div className="max-w-2xl space-y-4">
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  { name: "Branding", tag: "Identity Systems" },
+                  { name: "Packaging", tag: "360° Shelf Standout" },
+                  { name: "Visual Systems", tag: "Omnichannel Scale" }
+                ].map((item) => (
+                  <span
+                    key={item.name}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-card border border-border/80 text-xs font-mono uppercase tracking-wider text-foreground font-semibold shadow-2xs hover:border-accent/40 hover:text-accent transition-colors"
+                  >
+                    <span className="text-accent">✦</span>
+                    <span>{item.name}</span>
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground font-sans font-light leading-relaxed">
+                Branding, packaging, and visual systems for ambitious founders who demand{" "}
+                <span className="text-foreground font-medium underline decoration-accent/40 decoration-2 underline-offset-6 hover:decoration-accent transition-colors">
+                  market leadership
+                </span>
+                .
+              </p>
+            </div>
+
+            {/* Right: Authority Seal Card */}
+            <div className="flex-shrink-0 flex items-center gap-4 p-4 sm:p-5 rounded-2xl bg-card border border-border/80 shadow-xs">
+              <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent font-display text-xl font-bold">
+                ✦
+              </div>
+              <div>
+                <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-0.5">Design Standard</p>
+                <p className="text-sm font-display font-bold text-foreground">Zero Fluff. Pure Impact.</p>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* 2. Positioning (Portrait & Bio) */}

@@ -9,6 +9,12 @@ import { ReviewModal, ReviewData } from "./ReviewModal";
 // Static fallback testimonials for Indian Audience (English & Hinglish)
 const initialTestimonials = [
   {
+    quote: "Saquib's work is an example of who he is - innovative, succinct and expeditious. Working with him has been such a pleasure and kept me at ease. He understands what the client wants clearly and executes in a prompt fashion that makes the entire process refreshingly easy. I cannot recommend Saquib enough for his proficiency and professional attitude. He has been a joy to work with.",
+    author: "Ujvala V",
+    role: "Director, Rus Organic / Bot Organic",
+    image: "https://api.dicebear.com/7.x/notionists/svg?seed=Ujvala&backgroundColor=e5e5e5"
+  },
+  {
     quote: "Bhai, what a transformation! The branding completely changed how our customers perceive us. Conversion rates straight up 40% badh gaye pehle mahine mein hi. Ek number kaam!",
     author: "Rahul Sharma",
     role: "Founder, Chai & Co.",

@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion, PanInfo } from "framer-motion";
-import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { ReviewModal } from "./ReviewModal";
+import { ReviewModal, ReviewData } from "./ReviewModal";
 
 // Static fallback testimonials for Indian Audience (English & Hinglish)
 const initialTestimonials = [
@@ -42,32 +42,42 @@ export function Testimonials() {
 
   const fetchReviews = async () => {
     try {
-      const q = query(
-        collection(db, "reviews"),
-        where("status", "==", "approved"),
-        orderBy("createdAt", "desc")
+      // 4-second timeout protection so Firestore fetch never hangs UI
+      const getDocsPromise = getDocs(collection(db, "reviews"));
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error("Firestore fetch timeout")), 4000)
       );
-      const snapshot = await getDocs(q);
+
+      const snapshot = await Promise.race([getDocsPromise, timeoutPromise]);
       
-      const dynamicReviews = snapshot.docs.map(doc => {
-        const data = doc.data();
-        return {
+      const dynamicReviews = snapshot.docs
+        .map((doc) => doc.data())
+        .filter((data) => data.status === "approved" || !data.status)
+        .map((data) => ({
           quote: data.quote,
           author: data.author,
-          role: data.role,
+          role: data.role || "Client",
           image: data.image || `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(data.author)}`
-        };
-      });
+        }));
 
-      // Combine dynamic and static
-      setTestimonials([...dynamicReviews, ...initialTestimonials]);
-    } catch (err) {
-      console.error("Failed to fetch reviews:", err);
-      // Fallback to initial
+      if (dynamicReviews.length > 0) {
+        setTestimonials([...dynamicReviews, ...initialTestimonials]);
+      } else {
+        setTestimonials(initialTestimonials);
+      }
+    } catch {
+      // Gracefully fall back to initial testimonials
       setTestimonials(initialTestimonials);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleReviewSuccess = (newReview?: ReviewData) => {
+    if (newReview) {
+      setTestimonials((prev) => [newReview, ...prev]);
+    }
+    fetchReviews();
   };
 
   useEffect(() => {
@@ -196,7 +206,7 @@ export function Testimonials() {
       <ReviewModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
-        onSuccess={fetchReviews} 
+        onSuccess={handleReviewSuccess} 
       />
     </section>
   );

@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, Layers, Sparkles, Box, Palette, Megaphone } from "lucide-react";
 import Container from "@/components/ui/Container";
 
@@ -109,9 +107,6 @@ const steps: ProcessStep[] = [
 ];
 
 export function ProjectProcessShowcase() {
-  const [activeStepIndex, setActiveStepIndex] = useState(0);
-  const currentStep = steps[activeStepIndex];
-
   return (
     <section id="showcase" className="py-24 md:py-36 bg-muted/30 border-t border-border/80 relative overflow-hidden">
       <Container>
@@ -154,114 +149,98 @@ export function ProjectProcessShowcase() {
           </div>
         </div>
 
-        {/* Phase Navigation Tabs */}
-        <div className="flex items-center gap-3 overflow-x-auto pb-4 mb-10 scrollbar-none">
-          {steps.map((step, idx) => {
-            const isActive = activeStepIndex === idx;
+        {/* VERTICAL PROJECT PROCESS TIMELINE */}
+        <div className="relative pl-6 sm:pl-10 md:pl-16 space-y-12 md:space-y-16 before:absolute before:left-3 sm:before:left-5 md:before:left-8 before:top-6 before:bottom-8 before:w-0.5 before:bg-gradient-to-b before:from-accent before:via-border before:to-border/30">
+          {steps.map((step) => {
             const Icon = step.icon;
             return (
-              <button
-                key={step.id}
-                onClick={() => setActiveStepIndex(idx)}
-                className={`flex items-center gap-3 px-5 py-3 rounded-2xl text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer border ${
-                  isActive
-                    ? "bg-foreground text-background border-foreground font-bold shadow-md scale-102"
-                    : "bg-card text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground"
-                }`}
-              >
-                <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
-                  isActive ? "bg-accent text-white" : "bg-muted text-muted-foreground"
-                }`}>
-                  {step.stepNumber}
-                </span>
-                <span className="hidden sm:inline font-sans font-medium text-sm capitalize">
-                  {step.title}
-                </span>
-                <Icon className="w-4 h-4 ml-1 opacity-70" />
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Active Phase Deep Dive Card */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentStep.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35 }}
-            className="bg-card rounded-3xl border border-border/80 shadow-[0_20px_50px_rgba(0,0,0,0.05)] overflow-hidden p-8 md:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center"
-          >
-            {/* Left Column: Process Breakdown */}
-            <div className="lg:col-span-6 flex flex-col justify-between h-full">
-              <div>
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">
-                    Phase {currentStep.stepNumber}
-                  </span>
-                  <span className="text-xs font-mono text-muted-foreground">
-                    {currentStep.duration}
-                  </span>
+              <div key={step.id} className="relative group">
+                {/* Vertical Node Dot along the spine */}
+                <div className="absolute -left-6 sm:-left-10 md:-left-16 top-3 -translate-x-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-card border-2 border-accent text-accent font-mono text-xs sm:text-sm font-bold flex items-center justify-center shadow-md z-10 transition-transform group-hover:scale-110">
+                  <span>{step.stepNumber}</span>
+                  <div className="absolute inset-0 rounded-full bg-accent/20 animate-ping opacity-30 pointer-events-none" />
                 </div>
 
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground tracking-tight mb-4">
-                  {currentStep.title}
-                </h3>
+                {/* Phase Card Content */}
+                <div className="bg-card rounded-3xl border border-border/80 shadow-[0_15px_40px_rgba(0,0,0,0.03)] overflow-hidden p-6 sm:p-8 md:p-10 lg:p-12 hover:border-accent/40 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all duration-300">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    
+                    {/* Left Column: Process Breakdown */}
+                    <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-6">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-3 mb-3">
+                          <span className="text-xs font-mono font-bold uppercase tracking-widest text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20 flex items-center gap-1.5">
+                            <Icon className="w-3.5 h-3.5" />
+                            Phase {step.stepNumber}
+                          </span>
+                          <span className="text-xs font-mono text-muted-foreground bg-muted/60 px-3 py-1 rounded-full border border-border/60">
+                            {step.duration}
+                          </span>
+                        </div>
 
-                <p className="text-base md:text-lg font-sans text-muted-foreground leading-relaxed mb-6 font-light">
-                  {currentStep.description}
-                </p>
+                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-foreground tracking-tight mb-3">
+                          {step.title}
+                        </h3>
 
-                {/* Key Actions List */}
-                <div className="space-y-3 mb-8">
-                  <p className="text-xs font-mono uppercase tracking-wider text-foreground font-bold">
-                    Key Execution Steps:
-                  </p>
-                  {currentStep.keyActions.map((action, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-sm font-sans text-foreground/80 leading-snug">
-                        {action}
-                      </span>
+                        <p className="text-xs font-mono uppercase tracking-wider text-accent/90 mb-3">
+                          Objective: {step.objective}
+                        </p>
+
+                        <p className="text-sm sm:text-base font-sans text-muted-foreground leading-relaxed font-light mb-6">
+                          {step.description}
+                        </p>
+
+                        {/* Key Actions List */}
+                        <div className="space-y-2.5">
+                          <p className="text-xs font-mono uppercase tracking-wider text-foreground font-bold">
+                            Key Execution Steps:
+                          </p>
+                          {step.keyActions.map((action, i) => (
+                            <div key={i} className="flex items-start gap-2.5">
+                              <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                              <span className="text-xs sm:text-sm font-sans text-foreground/85 leading-snug">
+                                {action}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Bottom Deliverable & Impact Metric Box */}
+                      <div className="pt-5 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                          <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-0.5">Key Deliverable</p>
+                          <p className="text-xs font-bold text-foreground font-mono">{step.deliverable}</p>
+                        </div>
+                        <div className="bg-muted/50 px-3.5 py-1.5 rounded-xl border border-border flex items-center gap-2 flex-shrink-0">
+                          <span className="text-base font-display font-bold text-accent">
+                            {step.metric.value}
+                          </span>
+                          <p className="text-[10px] font-mono text-muted-foreground uppercase">{step.metric.label}</p>
+                        </div>
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Bottom Deliverable & Impact Metric Box */}
-              <div className="pt-6 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div>
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-1">Deliverable</p>
-                  <p className="text-xs font-bold text-foreground font-mono">{currentStep.deliverable}</p>
-                </div>
-                <div className="bg-muted/50 px-4 py-2 rounded-2xl border border-border flex items-center gap-3">
-                  <div>
-                    <span className="text-lg md:text-xl font-display font-bold text-accent">
-                      {currentStep.metric.value}
-                    </span>
-                    <p className="text-[10px] font-mono text-muted-foreground uppercase">{currentStep.metric.label}</p>
+                    {/* Right Column: High-Res Project Asset Viewer */}
+                    <div className="lg:col-span-6 relative aspect-[16/11] sm:aspect-[4/3] w-full rounded-2xl overflow-hidden bg-muted/30 border border-border/80 shadow-md group/img">
+                      <Image
+                        src={step.image}
+                        alt={step.title}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover object-center transition-all duration-700 group-hover/img:scale-104"
+                      />
+                      <div className="absolute bottom-3 right-3 bg-black/65 backdrop-blur-md px-3 py-1 rounded-full text-white text-[10px] font-mono uppercase tracking-widest border border-white/20">
+                        Phase {step.stepNumber} Asset
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Right Column: High-Res Project Asset Viewer */}
-            <div className="lg:col-span-6 relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-muted/30 border border-border/80 shadow-md">
-              <Image
-                src={currentStep.image}
-                alt={currentStep.title}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center transition-all duration-700 hover:scale-103"
-                priority
-              />
-              <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full text-white text-[10px] font-mono uppercase tracking-widest border border-white/20">
-                Artwork Preview: Phase {currentStep.stepNumber}
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            );
+          })}
+        </div>
       </Container>
     </section>
   );

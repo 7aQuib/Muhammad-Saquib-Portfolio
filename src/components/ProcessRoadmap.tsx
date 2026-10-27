@@ -18,14 +18,14 @@ export default function ProcessRoadmap({ steps }: { steps: Step[] }) {
   useGSAP(() => {
     if (!containerRef.current || !lineRef.current) return;
 
-    // Pinning and drawing the line
+    // Pinning and drawing the vertical line
     gsap.to(lineRef.current, {
-      scaleX: 1,
+      scaleY: 1,
       ease: "none",
       scrollTrigger: {
         trigger: containerRef.current,
         start: "center center", // Pin when the section reaches the center of viewport
-        end: `+=${window.innerHeight * 2}`, // Stay pinned for 2 screen heights
+        end: `+=${window.innerHeight * 1.5}`,
         pin: true,
         scrub: 0.5,
         onUpdate: (self) => {
@@ -95,93 +95,49 @@ export default function ProcessRoadmap({ steps }: { steps: Step[] }) {
 
         </div>
 
-        {/* Horizontal Timeline Section */}
-        <div className="relative w-full h-40 hidden md:block mt-12">
-          
-          {/* Base Track */}
-          <div className="absolute top-1/2 left-0 w-full h-[2px] bg-border -translate-y-1/2" />
-          
-          {/* Animated Progress Track */}
+        {/* Vertical Timeline Section */}
+        <div className="flex flex-col gap-10 mt-12 border-l-2 border-border pl-8 md:pl-12 relative max-w-2xl">
+          {/* Animated vertical track */}
           <div 
             ref={lineRef}
-            className="absolute top-1/2 left-0 w-full h-[4px] bg-foreground origin-left scale-x-0 -translate-y-1/2 z-10" 
+            className="absolute -left-[2px] top-0 bottom-0 w-[4px] bg-foreground origin-top scale-y-0 z-10 rounded-full"
           />
 
-          {/* Timeline Nodes Container */}
-          <div className="absolute top-0 left-0 w-full h-full flex justify-between items-center z-20 px-[2px]">
-            {steps.map((step, idx) => {
-              const isActive = activeIndex === idx;
-              const isPast = activeIndex > idx;
-              const isReached = isActive || isPast;
-
-              return (
-                <div key={idx} className="relative flex flex-col items-center justify-center w-0">
-                  
-                  {/* Floating Pill (Week/Step name) */}
-                  <div className={`absolute bottom-10 px-5 py-2 rounded-full border-2 text-xs font-mono whitespace-nowrap transition-all duration-500 ${
-                    isActive 
-                      ? 'bg-foreground text-background border-foreground shadow-hard -translate-y-2' 
-                      : isPast 
-                        ? 'bg-background text-foreground border-foreground/50' 
-                        : 'bg-background text-muted-foreground border-border'
-                  }`}>
-                    {step.step}
-                  </div>
-
-                  {/* The Node Dot */}
-                  <div className={`relative w-4 h-4 rounded-full transition-all duration-500 z-10 border-2 ${
-                    isReached ? 'bg-foreground border-foreground' : 'bg-background border-border'
-                  }`} />
-
-                  {/* Pulsing Outer Ring for Active Node */}
-                  <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-accent transition-all duration-700 ease-out pointer-events-none ${
-                    isActive ? 'w-12 h-12 opacity-100 scale-100' : 'w-4 h-4 opacity-0 scale-50'
-                  }`} />
-                  
-                  {/* Optional Text Below */}
-                  <div className={`absolute top-12 left-1/2 -translate-x-1/2 w-max text-center transition-all duration-500 ${
-                    isActive ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-                  }`}>
-                    <div className="flex flex-col gap-1 text-muted-foreground text-xs font-sans tracking-wide">
-                      <span>— {step.title.split(' ')[0]}</span>
-                      {step.title.split(' ').length > 1 && <span>— {step.title.split(' ').slice(1).join(' ')}</span>}
-                    </div>
-                  </div>
-
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Mobile Fallback View (Vertical Timeline) */}
-        <div className="md:hidden flex flex-col gap-8 mt-12 border-l-2 border-border pl-6 relative">
           {steps.map((step, idx) => {
             const isActive = activeIndex === idx;
             const isPast = activeIndex > idx;
             const isReached = isActive || isPast;
 
             return (
-              <div key={idx} className="relative">
-                {/* Vertical Node */}
-                <div className={`absolute -left-[31px] top-1 w-4 h-4 rounded-full border-2 transition-all duration-300 z-10 ${
+              <div 
+                key={idx} 
+                className="relative cursor-pointer group" 
+                onClick={() => setActiveIndex(idx)}
+              >
+                {/* Vertical Node Dot */}
+                <div className={`absolute -left-[41px] md:-left-[57px] top-1.5 w-5 h-5 rounded-full border-2 transition-all duration-300 z-10 flex items-center justify-center ${
                   isReached ? 'bg-foreground border-foreground' : 'bg-background border-border'
-                }`} />
+                }`}>
+                  {isActive && <div className="w-2 h-2 rounded-full bg-accent" />}
+                </div>
                 
-                {/* Active Ring */}
-                <div className={`absolute -left-[39px] top-[-3px] w-8 h-8 rounded-full border-2 border-accent transition-all duration-700 ease-out pointer-events-none ${
+                {/* Active Outer Ring */}
+                <div className={`absolute -left-[51px] md:-left-[67px] top-[-3.5px] w-10 h-10 rounded-full border-2 border-accent transition-all duration-700 ease-out pointer-events-none ${
                   isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                 }`} />
 
                 <div className="mb-2">
-                  <span className={`text-xs font-mono px-3 py-1 rounded-full border-2 inline-block mb-3 transition-colors ${
-                    isActive ? 'bg-foreground text-background border-foreground' : 'bg-transparent text-muted-foreground border-border'
+                  <span className={`text-xs font-mono px-3.5 py-1 rounded-full border-2 inline-block mb-2 transition-colors ${
+                    isActive ? 'bg-foreground text-background border-foreground shadow-sm' : 'bg-transparent text-muted-foreground border-border'
                   }`}>
                     {step.step}
                   </span>
-                  <h4 className={`text-xl font-bold transition-colors ${isActive ? 'text-foreground' : 'text-muted-foreground'}`}>
+                  <h4 className={`text-xl md:text-2xl font-bold font-display transition-colors ${isActive ? 'text-foreground' : 'text-muted-foreground'}`}>
                     {step.title}
                   </h4>
+                  <p className="text-sm font-sans text-muted-foreground mt-1 max-w-lg leading-relaxed">
+                    {step.desc}
+                  </p>
                 </div>
               </div>
             );

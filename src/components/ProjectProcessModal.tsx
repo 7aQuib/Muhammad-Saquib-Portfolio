@@ -645,15 +645,15 @@ interface ProjectProcessModalProps {
 const phaseIcons = [Layers, Sparkles, Palette, Box, Megaphone];
 
 export function ProjectProcessModal({ isOpen, onClose, projectId }: ProjectProcessModalProps) {
-  const [activePhaseIndex, setActivePhaseIndex] = useState(0);
   const [selectedGalleryImg, setSelectedGalleryImg] = useState<string | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<any | null>(null);
 
   const project = projectId ? (allProjectsCaseStudies[projectId] || allProjectsCaseStudies["juice-pop-brand"]) : null;
 
-  // Reset phase when switching projects
+  // Reset gallery selection when switching projects
   useEffect(() => {
-    setActivePhaseIndex(0);
     setSelectedGalleryImg(null);
+    setLightboxImage(null);
   }, [projectId]);
 
   // Handle ESC key and lock body scroll
@@ -662,14 +662,10 @@ export function ProjectProcessModal({ isOpen, onClose, projectId }: ProjectProce
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onClose();
-      } else if (e.key === "ArrowRight") {
-        if (project) {
-          setActivePhaseIndex((prev) => (prev + 1) % project.phases.length);
-        }
-      } else if (e.key === "ArrowLeft") {
-        if (project) {
-          setActivePhaseIndex((prev) => (prev - 1 + project.phases.length) % project.phases.length);
+        if (lightboxImage) {
+          setLightboxImage(null);
+        } else {
+          onClose();
         }
       }
     };
@@ -682,12 +678,16 @@ export function ProjectProcessModal({ isOpen, onClose, projectId }: ProjectProce
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = originalOverflow;
     };
-  }, [isOpen, onClose, project]);
+  }, [isOpen, onClose, lightboxImage]);
 
   if (!isOpen || !project) return null;
 
-  const currentPhase = project.phases[activePhaseIndex] || project.phases[0];
-  const CurrentIcon = phaseIcons[activePhaseIndex % phaseIcons.length] || Layers;
+  const scrollToPhase = (phaseNumber: string) => {
+    const el = document.getElementById(`phase-${phaseNumber}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -760,148 +760,163 @@ export function ProjectProcessModal({ isOpen, onClose, projectId }: ProjectProce
                 <p className="font-bold text-foreground">{project.timeframe}</p>
               </div>
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Impact Benchmark</p>
-                <p className="font-bold text-accent">{currentPhase.metric.value} — {currentPhase.metric.label}</p>
+                <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Scope</p>
+                <p className="font-bold text-foreground truncate" title={project.scope}>{project.scope}</p>
               </div>
             </div>
 
-            {/* Process Phase Tabs */}
+            {/* Project Brief Overview Card */}
+            <div className="p-5 md:p-6 bg-card rounded-2xl border border-border/70 shadow-sm">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-accent font-bold mb-2">Project Strategic Brief</p>
+              <p className="text-sm md:text-base font-sans text-muted-foreground leading-relaxed font-light">
+                {project.overview}
+              </p>
+            </div>
+
+            {/* Quick-Jump Vertical Navigation Chips */}
+            <div className="sticky top-0 z-20 py-2.5 px-4 bg-card/95 backdrop-blur-md rounded-2xl border border-border/80 shadow-sm flex items-center justify-between gap-3">
+              <span className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground font-bold whitespace-nowrap hidden sm:inline">
+                Jump to Phase:
+              </span>
+              <div className="flex items-center gap-2 overflow-x-auto scrollbar-none w-full sm:w-auto">
+                {project.phases.map((phase) => (
+                  <button
+                    key={phase.number}
+                    onClick={() => scrollToPhase(phase.number)}
+                    className="px-3 py-1.5 rounded-xl text-[11px] font-mono uppercase tracking-wider bg-muted/60 hover:bg-foreground hover:text-background text-foreground transition-all border border-border flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
+                  >
+                    <span className="w-4 h-4 rounded-full bg-accent/20 text-accent text-[9px] font-bold flex items-center justify-center">
+                      {phase.number}
+                    </span>
+                    <span className="hidden md:inline font-sans text-xs">{phase.title.split("&")[0].trim()}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* VERTICAL PROJECT PROCESS TIMELINE */}
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-bold">
-                  Working Methodology Phases ({activePhaseIndex + 1}/{project.phases.length})
+              <div className="mb-8">
+                <span className="text-xs font-mono uppercase tracking-widest text-accent font-bold">
+                  Working Methodology Timeline ({project.phases.length} Phases End-to-End)
                 </span>
-                <span className="hidden sm:inline text-[11px] font-mono text-muted-foreground">
-                  Use ← → arrows to navigate
-                </span>
+                <h3 className="text-2xl font-display font-bold text-foreground mt-1">
+                  How This Project Was Executed
+                </h3>
               </div>
 
-              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+              <div className="relative pl-6 sm:pl-10 md:pl-14 space-y-10 md:space-y-12 before:absolute before:left-3 sm:before:left-5 md:before:left-7 before:top-4 before:bottom-6 before:w-0.5 before:bg-gradient-to-b before:from-accent before:via-border before:to-border/40">
                 {project.phases.map((phase, idx) => {
-                  const isActive = activePhaseIndex === idx;
-                  const IconComponent = phaseIcons[idx % phaseIcons.length];
+                  const IconComponent = phaseIcons[idx % phaseIcons.length] || Layers;
                   return (
-                    <button
-                      key={phase.number}
-                      onClick={() => {
-                        setActivePhaseIndex(idx);
-                        setSelectedGalleryImg(null);
-                      }}
-                      className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer border ${
-                        isActive
-                          ? "bg-foreground text-background border-foreground font-bold shadow-md"
-                          : "bg-card text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground"
-                      }`}
-                    >
-                      <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
-                        isActive ? "bg-accent text-white" : "bg-muted text-muted-foreground"
-                      }`}>
-                        {phase.number}
-                      </span>
-                      <span className="font-sans font-medium text-xs">
-                        {phase.title}
-                      </span>
-                      <IconComponent className="w-3.5 h-3.5 opacity-70" />
-                    </button>
+                    <div key={phase.number} id={`phase-${phase.number}`} className="relative group scroll-mt-24">
+                      {/* Vertical Node Dot along the spine */}
+                      <div className="absolute -left-6 sm:-left-10 md:-left-14 top-2 -translate-x-1/2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-card border-2 border-accent text-accent font-mono text-xs sm:text-sm font-bold flex items-center justify-center shadow-md z-10 transition-transform group-hover:scale-110">
+                        <span>{phase.number}</span>
+                        <div className="absolute inset-0 rounded-full bg-accent/20 animate-ping opacity-30 pointer-events-none" />
+                      </div>
+
+                      {/* Phase Card Content */}
+                      <div className="bg-card rounded-2xl border border-border/80 p-6 md:p-8 shadow-sm hover:border-accent/40 hover:shadow-md transition-all duration-300">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
+                          
+                          {/* Left Column: Details & Execution */}
+                          <div className="lg:col-span-7 space-y-5">
+                            <div className="flex flex-wrap items-center gap-2.5">
+                              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20 flex items-center gap-1.5">
+                                <IconComponent className="w-3.5 h-3.5" />
+                                Phase {phase.number}
+                              </span>
+                              <span className="text-xs font-mono text-muted-foreground bg-muted/60 px-2.5 py-1 rounded-full border border-border/60">
+                                {phase.duration}
+                              </span>
+                            </div>
+
+                            <div>
+                              <h4 className="text-2xl sm:text-3xl font-display font-bold text-foreground tracking-tight mb-2">
+                                {phase.title}
+                              </h4>
+                              <p className="text-xs font-mono uppercase tracking-wider text-accent/90">
+                                Objective: {phase.objective}
+                              </p>
+                            </div>
+
+                            <p className="text-sm sm:text-base font-sans text-muted-foreground leading-relaxed font-light">
+                              {phase.description}
+                            </p>
+
+                            {/* Key Execution Steps */}
+                            <div className="space-y-2 pt-2">
+                              <p className="text-xs font-mono uppercase tracking-wider text-foreground font-bold">
+                                Key Execution Steps:
+                              </p>
+                              {phase.keyActions.map((action, i) => (
+                                <div key={i} className="flex items-start gap-2.5">
+                                  <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                                  <span className="text-xs sm:text-sm font-sans text-foreground/85 leading-snug">
+                                    {action}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+
+                            {/* Deliverable & Metric Ribbon */}
+                            <div className="pt-4 border-t border-border/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                              <div>
+                                <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-0.5">Key Deliverable</p>
+                                <p className="text-xs font-bold text-foreground font-mono">{phase.deliverable}</p>
+                              </div>
+                              <div className="bg-muted/50 px-3.5 py-1.5 rounded-xl border border-border flex items-center gap-2 flex-shrink-0">
+                                <span className="text-base font-display font-bold text-accent">
+                                  {phase.metric.value}
+                                </span>
+                                <p className="text-[10px] font-mono text-muted-foreground uppercase">{phase.metric.label}</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Right Column: High-Res Artwork Visual */}
+                          <div 
+                            onClick={() => setLightboxImage(phase.image)}
+                            className="lg:col-span-5 relative aspect-[16/11] w-full rounded-2xl overflow-hidden bg-muted/40 border border-border/80 shadow-md group/img cursor-zoom-in"
+                          >
+                            <Image
+                              src={phase.image}
+                              alt={phase.title}
+                              fill
+                              sizes="(max-width: 1024px) 100vw, 40vw"
+                              className="object-cover object-center transition-all duration-500 group-hover/img:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-all flex items-center justify-center">
+                              <span className="opacity-0 group-hover/img:opacity-100 transition-opacity px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-mono uppercase tracking-widest border border-white/20">
+                                Click to Expand
+                              </span>
+                            </div>
+                            <div className="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full text-white text-[10px] font-mono uppercase tracking-widest border border-white/20">
+                              Phase {phase.number} Asset
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
                   );
                 })}
               </div>
             </div>
 
-            {/* Active Phase Deep Dive */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentPhase.number}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.25 }}
-                className="bg-card rounded-2xl border border-border/80 p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start shadow-sm"
-              >
-                {/* Left Column: Details & Execution */}
-                <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-6">
-                  <div>
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">
-                        Phase {currentPhase.number}
-                      </span>
-                      <span className="text-xs font-mono text-muted-foreground">
-                        {currentPhase.duration}
-                      </span>
-                    </div>
-
-                    <h3 className="text-2xl sm:text-3xl font-display font-bold text-foreground tracking-tight mb-3">
-                      {currentPhase.title}
-                    </h3>
-
-                    <p className="text-sm sm:text-base font-sans text-muted-foreground leading-relaxed font-light mb-6">
-                      {currentPhase.description}
-                    </p>
-
-                    {/* Key Actions List */}
-                    <div className="space-y-2.5">
-                      <p className="text-xs font-mono uppercase tracking-wider text-foreground font-bold">
-                        Key Execution Steps:
-                      </p>
-                      {currentPhase.keyActions.map((action, i) => (
-                        <div key={i} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                          <span className="text-xs sm:text-sm font-sans text-foreground/85 leading-snug">
-                            {action}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Deliverable & Metric Ribbon */}
-                  <div className="pt-5 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div>
-                      <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-0.5">Key Deliverable</p>
-                      <p className="text-xs font-bold text-foreground font-mono">{currentPhase.deliverable}</p>
-                    </div>
-                    <div className="bg-muted/50 px-3.5 py-1.5 rounded-xl border border-border flex items-center gap-2">
-                      <span className="text-base font-display font-bold text-accent">
-                        {currentPhase.metric.value}
-                      </span>
-                      <p className="text-[10px] font-mono text-muted-foreground uppercase">{currentPhase.metric.label}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Column: High-Res Visual Preview */}
-                <div className="lg:col-span-6 relative aspect-[16/11] w-full rounded-2xl overflow-hidden bg-muted/40 border border-border/80 shadow-md">
-                  <Image
-                    src={selectedGalleryImg || currentPhase.image}
-                    alt={currentPhase.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover object-center transition-all duration-500 hover:scale-102"
-                    priority
-                  />
-                  <div className="absolute bottom-3 right-3 bg-black/65 backdrop-blur-md px-3 py-1 rounded-full text-white text-[10px] font-mono uppercase tracking-widest border border-white/20">
-                    {selectedGalleryImg ? "Gallery Inspection" : `Artwork: Phase ${currentPhase.number}`}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
             {/* Additional Project Artboards Gallery Strip (if available) */}
             {project.gallery && project.gallery.length > 0 && (
-              <div>
+              <div className="pt-6 border-t border-border/80">
                 <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground font-bold mb-3">
-                  Project Artboards & Production Assets ({project.gallery.length} Sheets)
+                  Project Artboards & Production Assets ({project.gallery.length} Sheets — Click to Enlarge)
                 </p>
                 <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 gap-3">
                   {project.gallery.map((artboard, idx) => (
                     <button
                       key={idx}
-                      onClick={() => setSelectedGalleryImg(artboard)}
-                      className={`relative aspect-[4/3] rounded-xl overflow-hidden border cursor-pointer transition-all hover:scale-105 ${
-                        (selectedGalleryImg || currentPhase.image) === artboard
-                          ? "border-accent ring-2 ring-accent/30 shadow-md"
-                          : "border-border hover:border-foreground/40"
-                      }`}
+                      onClick={() => setLightboxImage(artboard)}
+                      className="relative aspect-[4/3] rounded-xl overflow-hidden border border-border hover:border-accent cursor-pointer transition-all hover:scale-105 shadow-sm group"
                     >
                       <Image
                         src={artboard}
@@ -910,6 +925,7 @@ export function ProjectProcessModal({ isOpen, onClose, projectId }: ProjectProce
                         sizes="120px"
                         className="object-cover"
                       />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all" />
                     </button>
                   ))}
                 </div>
@@ -919,21 +935,9 @@ export function ProjectProcessModal({ isOpen, onClose, projectId }: ProjectProce
 
           {/* Modal Sticky Bottom Actions Bar */}
           <div className="p-4 sm:p-6 border-t border-border/80 bg-card/95 backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-4 flex-shrink-0">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setActivePhaseIndex((prev) => (prev - 1 + project.phases.length) % project.phases.length)}
-                className="px-3 py-2 rounded-xl border border-border text-xs font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all flex items-center gap-1.5 cursor-pointer"
-              >
-                <ChevronLeft className="w-4 h-4" />
-                <span>Prev Phase</span>
-              </button>
-              <button
-                onClick={() => setActivePhaseIndex((prev) => (prev + 1) % project.phases.length)}
-                className="px-3 py-2 rounded-xl border border-border text-xs font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all flex items-center gap-1.5 cursor-pointer"
-              >
-                <span>Next Phase</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
+            <div className="text-xs font-mono text-muted-foreground flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-accent" />
+              <span>Full End-to-End Design Process Documented</span>
             </div>
 
             <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
@@ -960,6 +964,37 @@ export function ProjectProcessModal({ isOpen, onClose, projectId }: ProjectProce
             </div>
           </div>
         </motion.div>
+
+        {/* Fullscreen Lightbox Preview */}
+        <AnimatePresence>
+          {lightboxImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[120] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 cursor-pointer"
+              onClick={() => setLightboxImage(null)}
+            >
+              <button
+                onClick={() => setLightboxImage(null)}
+                className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer z-10"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <div 
+                className="relative max-w-5xl max-h-[85vh] w-full h-full flex items-center justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Image
+                  src={lightboxImage}
+                  alt="Artwork Preview"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </AnimatePresence>
   );

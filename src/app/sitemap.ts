@@ -1,21 +1,23 @@
 import type { MetadataRoute } from 'next';
-import { projects } from '@/data/projects';
+import caseStudies from '@/data/caseStudies.json';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://muhammad-saquib-portfolio.vercel.app';
 
-  const projectUrls = projects.map((project) => ({
-    url: `${baseUrl}/project/${project.id}`,
+  // Real 5 project case studies
+  const projectUrls: MetadataRoute.Sitemap = caseStudies.map((study) => ({
+    url: `${baseUrl}/project/${study.slug}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'weekly',
     priority: 0.8,
   }));
 
+  // 4 Core services
   const serviceSlugs = ['branding-identity', 'packaging-design', 'social-media-kits', 'printing-design'];
-  const serviceUrls = serviceSlugs.map((slug) => ({
+  const serviceUrls: MetadataRoute.Sitemap = serviceSlugs.map((slug) => ({
     url: `${baseUrl}/service/${slug}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'weekly',
     priority: 0.8,
   }));
 
@@ -23,13 +25,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
+      changeFrequency: 'daily',
+      priority: 1.0,
     },
     {
       url: `${baseUrl}/about`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     ...serviceUrls,

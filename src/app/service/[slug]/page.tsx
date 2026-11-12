@@ -232,6 +232,12 @@ const workflowSteps = [
   }
 ];
 
+export function generateStaticParams() {
+  return Object.keys(servicesData).map((slug) => ({
+    slug,
+  }));
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const service = servicesData[slug as keyof typeof servicesData];

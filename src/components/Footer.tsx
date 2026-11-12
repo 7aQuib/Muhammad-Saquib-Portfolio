@@ -42,35 +42,39 @@ export function Footer({ variant = "default" }: { variant?: "default" | "service
             </div>
           </div>
           <div className={isService ? 'footer-col' : ''}>
-            <h3 className={`font-display text-2xl ${isService ? 'mb-svc-sm' : 'mb-6'}`}>Services & Store</h3>
-            <ul className={`font-hand text-xl ${isService ? 'space-y-svc-sm text-muted-foreground' : 'space-y-3 text-muted-foreground'}`}>
+            <h3 className={`font-display text-2xl ${isService ? 'mb-svc-sm' : 'mb-6'}`}>Services</h3>
+            <ul className={`font-sans text-sm ${isService ? 'space-y-svc-sm text-muted-foreground' : 'space-y-2.5 text-muted-foreground'}`}>
               <li><Link href="/service/branding-identity" className="hover:text-accent hover:underline decoration-2 transition-colors">Branding Identity</Link></li>
               <li><Link href="/service/packaging-design" className="hover:text-accent hover:underline decoration-2 transition-colors">Packaging Design</Link></li>
               <li><Link href="/service/social-media-kits" className="hover:text-accent hover:underline decoration-2 transition-colors">Social Media Kits</Link></li>
               <li><Link href="/service/printing-design" className="hover:text-accent hover:underline decoration-2 transition-colors">Printing Design</Link></li>
             </ul>
           </div>
-          
-          <div className={`${isService ? 'footer-col mt-6' : ''}`}>
-            <h3 className={`font-display text-2xl ${isService ? 'mb-svc-sm' : 'mb-6'}`}>Quick Links</h3>
-            <ul className={`font-sans text-base ${isService ? 'space-y-svc-sm text-muted-foreground' : 'space-y-3 text-muted-foreground'}`}>
-              <li><Link href="/" className="hover:text-accent hover:underline decoration-2 transition-colors">Home</Link></li>
-              <li><Link href="/#projects" className="hover:text-accent hover:underline decoration-2 transition-colors">Selected Work</Link></li>
-              <li><Link href="/#showcase" className="hover:text-accent hover:underline decoration-2 transition-colors">Juice Pop Showcase</Link></li>
-              <li><Link href="/#process" className="hover:text-accent hover:underline decoration-2 transition-colors">The Process</Link></li>
-              <li><Link href="/about" className="hover:text-accent hover:underline decoration-2 transition-colors">About Me</Link></li>
-              <li><Link href="/#testimonials" className="hover:text-accent hover:underline decoration-2 transition-colors">Testimonials</Link></li>
+
+          <div className={isService ? 'footer-col' : ''}>
+            <h3 className={`font-display text-2xl ${isService ? 'mb-svc-sm' : 'mb-6'}`}>Case Studies</h3>
+            <ul className={`font-sans text-sm ${isService ? 'space-y-svc-sm text-muted-foreground' : 'space-y-2.5 text-muted-foreground'}`}>
+              <li><Link href="/project/identity-design" className="hover:text-accent hover:underline decoration-2 transition-colors">Identity Design</Link></li>
+              <li><Link href="/project/packaging-solution" className="hover:text-accent hover:underline decoration-2 transition-colors">Packaging Solution</Link></li>
+              <li><Link href="/project/social-media-creative" className="hover:text-accent hover:underline decoration-2 transition-colors">Social Media Creative</Link></li>
+              <li><Link href="/project/print-media" className="hover:text-accent hover:underline decoration-2 transition-colors">Print Media</Link></li>
+              <li><Link href="/project/motion-graphics" className="hover:text-accent hover:underline decoration-2 transition-colors">Motion Graphics</Link></li>
             </ul>
           </div>
           
           <div className={isService ? 'footer-col' : ''}>
-            <h3 className={`font-display text-2xl ${isService ? 'mb-svc-sm' : 'mb-6'}`}>Get in Touch</h3>
-            <ul className={`font-sans text-base ${isService ? 'space-y-svc-sm text-muted-foreground' : 'space-y-3 text-muted-foreground'}`}>
-              <li><a href="mailto:mohammadsaquib693@gmail.com" className="hover:text-accent hover:underline decoration-2 transition-colors">mohammadsaquib693@gmail.com</a></li>
+            <h3 className={`font-display text-2xl ${isService ? 'mb-svc-sm' : 'mb-6'}`}>Quick Links</h3>
+            <ul className={`font-sans text-sm ${isService ? 'space-y-svc-sm text-muted-foreground' : 'space-y-2.5 text-muted-foreground'}`}>
+              <li><Link href="/" className="hover:text-accent hover:underline decoration-2 transition-colors">Home</Link></li>
+              <li><Link href="/about" className="hover:text-accent hover:underline decoration-2 transition-colors">About Me</Link></li>
+              <li><Link href="/#projects" className="hover:text-accent hover:underline decoration-2 transition-colors">Selected Work</Link></li>
+              <li><Link href="/#process" className="hover:text-accent hover:underline decoration-2 transition-colors">The Process</Link></li>
+              <li><Link href="/#testimonials" className="hover:text-accent hover:underline decoration-2 transition-colors">Client Reviews</Link></li>
+              <li className="pt-2"><a href="mailto:mohammadsaquib693@gmail.com" className="hover:text-accent hover:underline decoration-2 transition-colors font-mono text-xs">mohammadsaquib693@gmail.com</a></li>
               <li className="pt-2">
                 <button
                   onClick={() => setIsEnquiryModalOpen(true)}
-                  className="bg-accent hover:bg-accent/90 text-white px-6 py-2.5 rounded-full shadow-lg transition-all text-[11px] font-bold uppercase tracking-[0.15em] whitespace-nowrap inline-flex items-center group font-sans"
+                  className="bg-accent hover:bg-accent/90 text-white px-5 py-2 rounded-full shadow-md transition-all text-[11px] font-bold uppercase tracking-[0.15em] whitespace-nowrap inline-flex items-center group font-sans cursor-pointer"
                 >
                   Let's Talk
                 </button>

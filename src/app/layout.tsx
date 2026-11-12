@@ -42,11 +42,20 @@ export const metadata: Metadata = {
     title: "Mohammad Saquib | Graphic Design Portfolio",
     description: "Brand & Packaging Designer crafting high-impact visual identities, social media creatives, and print media designs.",
     siteName: "Mohammad Saquib Portfolio",
+    images: [
+      {
+        url: "/images/mockup-branding.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Mohammad Saquib | Brand & Packaging Designer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mohammad Saquib | Graphic Design Portfolio",
     description: "Brand & Packaging Designer crafting high-impact visual identities, social media creatives, and print media designs.",
+    images: ["/images/mockup-branding.jpg"],
     creator: "@Ansarisaquib19",
   },
   robots: {
